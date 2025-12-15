@@ -1,0 +1,28 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
+import Order from "./pages/order.tsx";
+import Product from "./pages/product.tsx";
+import Category from "./pages/category.tsx";
+import Brand from "./pages/brand.tsx";
+import { SideBar } from "./components/Sidebar.tsx";
+
+createRoot(document.getElementById("root")!).render(
+  // <StrictMode>
+  //   <SideBar />
+  //   <App />
+  // </StrictMode>
+  <Router>
+    <div className="flex">
+      <SideBar />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/brand" element={<Brand />} />
+      </Routes>
+    </div>
+  </Router>
+);
