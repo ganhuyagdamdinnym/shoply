@@ -1,6 +1,42 @@
 import { Icon } from "@iconify/react";
 import "../App.css";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+type OptionType = "хэлбэр" | "төрөл" | "салбар" | "төлөв";
 function Order() {
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
+  const options: Record<OptionType, string[]> = {
+    хэлбэр: ["Бүх хэлбэр", "Онлайн", "Оффлайн"],
+    төрөл: ["Бүх төрөл", "Сургалт", "Ажлын байр", "Туршлага"],
+    салбар: ["Бүх салбар", "IT", "Боловсрол", "Эрүүл мэнд"],
+    төлөв: ["Бүх төлөв", "Идэвхтэй", "Хаагдсан"],
+  };
+
+  const handleToggle = (type: string) => {
+    setOpenDropdown(openDropdown === type ? null : type);
+  };
+  const orders = [
+    {
+      orderNumber: "SH0423",
+      status: "цуцлагдсан",
+      price: 10000,
+      user: "Daimaa",
+      userPhoneNumber: "86321240",
+      orderType: "delivery",
+      type: "transfort",
+      orderDate: "2025.12.12",
+    },
+    {
+      orderNumber: "SH2007",
+      status: "амжилттай",
+      price: 10000,
+      user: "Daimaa",
+      orderType: "delivery",
+      type: "transfort",
+      orderDate: "2025.12.12",
+    },
+  ];
   return (
     <div className="w-screen h-screen p-4 flex flex-col gap-4">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
@@ -10,27 +46,140 @@ function Order() {
             Бүх захиалгын дэлгэрэнгүй мэдээлэл
           </p>
         </div>
-        <button
-          className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm
+        <Link to="/order/create">
+          <button
+            className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm
                    bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-44"
-        >
-          <Icon
-            icon="material-symbols-light:border-all-outline-rounded"
-            width="24"
-          />
-          <p>Захиалга үүсгэх</p>
-        </button>
+          >
+            <Icon
+              icon="material-symbols-light:border-all-outline-rounded"
+              width="24"
+            />
+            <p>Захиалга үүсгэх</p>
+          </button>
+        </Link>
       </div>
-      <div className="w-full items-center justify-between ">
-        <div className="relative w-[320px] h-[40px]">
-          <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
-            <Icon icon="material-symbols-light:search-rounded" width="20" />
+      <div>
+        <div className="w-full flex items-center justify-between ">
+          <div className="relative w-[320px] h-[40px]">
+            <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
+              <Icon icon="material-symbols-light:search-rounded" width="20" />
+            </div>
+            <input
+              type="text"
+              placeholder="Захиа. #, нэр, имэйл, утасаар хайх..."
+              className="flex h-10 pl-9 w-full rounded-md py-2 sm:text-sm border border-[#888485]"
+            />
           </div>
-          <input
-            type="text"
-            placeholder="Захиа. #, нэр, имэйл, утасаар хайх..."
-            className="flex h-10 pl-9 w-full rounded-md py-2 sm:text-sm border border-[#e7e3e4]"
-          />
+          <div className="items-center gap-2 hidden lg:flex">
+            <div className="flex w-full gap-1.5">
+              {(["хэлбэр", "төрөл", "салбар", "төлөв"] as OptionType[]).map(
+                (type) => (
+                  <div key={type} className="relative">
+                    <button
+                      onClick={() => handleToggle(type)}
+                      className="flex justify-center items-center gap-1 border border-[#888485] py-1 px-3 rounded-lg"
+                    >
+                      <span className="text-[14px]">{options[type][0]}</span>
+                      <Icon
+                        icon="oui:arrow-down"
+                        width="16"
+                        color="#888485"
+                        className="mt-1"
+                      />
+                    </button>
+
+                    {openDropdown === type && (
+                      <ul className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                        {options[type].map((option) => (
+                          <li
+                            key={option}
+                            onClick={() => {
+                              console.log(type, option);
+                              setOpenDropdown(null);
+                            }}
+                            className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-[14px]"
+                          >
+                            {option}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
+          <div className="relative w-full overflow-x-auto">
+            <table className="w-full caption-bottom text-sm">
+              <thead>
+                <tr className="bg-muted border-b border-[#e7e3e4]">
+                  <th className="h-10 px-2 text-left font-medium">
+                    Захиалгын #
+                  </th>
+                  <th className="h-10 px-2 text-left font-medium">Төлөв</th>
+                  <th className="h-10 px-2 text-left font-medium">Үнийн дүн</th>
+                  <th className="h-10 px-2 text-left font-medium">Хэрэглэгч</th>
+                  <th className="h-10 px-2 text-left font-medium">
+                    Захиалгын төрөл
+                  </th>
+                  <th className="h-10 px-2 text-left font-medium">
+                    Төлөх хэлбэр
+                  </th>
+                  <th className="h-10 px-2 text-left font-medium">
+                    Захиалсан огноо
+                  </th>
+                  <th className="h-10 px-2"></th>
+                </tr>
+              </thead>
+              <tbody className="bg-[#f5f4f4]">
+                {orders.map((order, index) => (
+                  <tr
+                    key={index}
+                    className="border-b border-[#e7e3e4] transition-colors"
+                  >
+                    <td className="px-2 py-2">{order.orderNumber}</td>
+                    <td
+                    // className={`px-2 py-2 font-semibold ${
+                    //   order.status == "цуцлагдсан"
+                    //     ? "text-[#b91c1c] bg-[]"
+                    //     : order.status == "амжилттай"
+                    //     ? "text-[green]"
+                    //     : ""
+                    // }`}
+                    >
+                      <p
+                        className={`px-2 py-2 font-semibold ${
+                          order.status == "цуцлагдсан"
+                            ? "text-[#b91c1c] bg-[fee2e2]"
+                            : order.status == "амжилттай"
+                            ? "text-[green]"
+                            : ""
+                        }`}
+                      >
+                        {order.status}
+                      </p>
+                    </td>
+                    <td className="px-2 py-2 text-[16px] font-medium">
+                      {order.price}₮
+                    </td>
+                    <td className="px-2 py-2 flex flex-col">
+                      <p className="font-medium"> {order.user}</p>
+                      <p>{order.userPhoneNumber}</p>
+                    </td>
+                    <td className="px-2 py-2 ">{order.orderType}</td>
+                    <td className="px-2 py-2 font-semibold">{order.type}</td>
+                    <td className="px-2 py-2">{order.orderDate}</td>
+                    <td className="px-2 py-2 text-right">
+                      <Icon icon="tabler:dots" width="24" />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

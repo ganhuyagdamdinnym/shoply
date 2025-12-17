@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 .bg-gradient {
   --tw-gradient-position: to right in oklab;
   --tw-gradient-from: var(--color-blue-500);
