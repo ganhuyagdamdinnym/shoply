@@ -1,6 +1,7 @@
 import "./App.css";
 import { Icon } from "@iconify/react";
 import { RequireSettings } from "./components/requireSettings";
+import { LastOrders } from "./components/lastOrders";
 function App() {
   return (
     <div className="h-screen w-screen p-4 flex flex-col gap-2 sm:gap-4">
@@ -82,6 +83,7 @@ function App() {
       </div>
       <div className="grid lg:grid-cols-2 gap-4 items-start">
         <RequireSettings />
+        <LastOrders />
       </div>
     </div>
   );

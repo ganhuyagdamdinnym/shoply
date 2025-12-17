@@ -1,39 +1,35 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 const primeDashboard = [
   { name: "/", icon: "proicons:home", text: "Самбар" },
   {
-    name: "order",
+    name: "/order",
     icon: "material-symbols-light:border-all-outline-rounded",
     text: "Захиалга",
   },
-  { name: "product", icon: "fluent-mdl2:product", text: "Бүтээгдэхүүн" },
-  { name: "category", icon: "quill:sort", text: "Ангилал" },
-  { name: "brand", icon: "tabler:chart-circles", text: "Брэнд" },
+  { name: "/product", icon: "fluent-mdl2:product", text: "Бүтээгдэхүүн" },
+  { name: "/category", icon: "quill:sort", text: "Ангилал" },
+  { name: "/brand", icon: "tabler:chart-circles", text: "Брэнд" },
 ];
-export const SideBar = () => {
-  const [currentStatus, setCurrentStatus] = useState<string>("dashboard");
-  const handleDashborad = (name: string) => {
-    setCurrentStatus(name);
-  };
 
+export const SideBar = () => {
   return (
-    <div className="w-56 h-screen bg-[#FBFBFB] px-4 border-r-1 border-[#EAE9ED] hidden md:block">
+    <div className="w-56 h-screen bg-[#FBFBFB] px-4 border-r border-[#EAE9ED] hidden md:block fixe top-0 left-0">
       {primeDashboard.map((e) => (
-        <Link to={`${e.name}`}>
-          <div
-            onClick={() => handleDashborad(e.name)}
-            className={`flex items-center gap-1 px-2 py-1 hover:bg-gray-200 rounded-xl mt-1 ${
-              e.name == currentStatus ? "bg-gray-200" : null
-            }`}
-          >
-            <Icon icon={`${e.icon}`} width="16" />
-            <button className="w-full flex bg-sidebar  text-[14px]">
-              {e.text}
-            </button>
-          </div>
-        </Link>
+        <NavLink
+          key={e.name}
+          to={e.name}
+          end={e.name === "/"}
+          className={({ isActive }) =>
+            `flex items-center gap-2 px-2 py-2 rounded-xl mt-1
+            hover:bg-gray-200
+            ${isActive ? "bg-gray-200 font-medium" : ""}`
+          }
+        >
+          <Icon icon={e.icon} width="16" />
+          <span className="text-[14px]">{e.text}</span>
+        </NavLink>
       ))}
     </div>
   );

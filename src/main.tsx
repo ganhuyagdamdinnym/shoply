@@ -7,6 +7,7 @@ import Product from "./pages/product.tsx";
 import Category from "./pages/category.tsx";
 import Brand from "./pages/brand.tsx";
 import { SideBar } from "./components/Sidebar.tsx";
+import CreateProduct from "./pages/productCreate.tsx";
 
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/product" element={<Product />} />
         <Route path="/category" element={<Category />} />
         <Route path="/brand" element={<Brand />} />
+        <Route path="/product/create" element={<CreateProduct />} />
       </Routes>
     </div>
   </Router>

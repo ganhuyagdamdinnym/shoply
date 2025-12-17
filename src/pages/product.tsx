@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import "../App.css";
+import { Link } from "react-router-dom";
 function Product() {
   return (
     <div className="w-screen h-screen p-4 flex flex-col gap-4">
@@ -12,13 +13,15 @@ function Product() {
             Бараа бүтээгдэхүүний нийт жагсаалт
           </p>
         </div>
-        <button
-          className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
+        <Link to="/product/create">
+          <button
+            className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
                    bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
-        >
-          <Icon icon="system-uicons:box-add" width="24" />
-          <p>Бараа нэмэх</p>
-        </button>
+          >
+            <Icon icon="system-uicons:box-add" width="24" />
+            <p>Бараа нэмэх</p>
+          </button>
+        </Link>
       </div>
       <div className="w-full items-center justify-between ">
         <div className="relative w-[320px] h-[40px]">
