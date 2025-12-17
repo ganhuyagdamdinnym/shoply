@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import "../App.css";
 import { Link } from "react-router-dom";
-import Category from "./category";
+
 function Product() {
   const products = [
     {

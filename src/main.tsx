@@ -16,7 +16,10 @@ createRoot(document.getElementById("root")!).render(
   // </StrictMode>
   <Router>
     <div className="flex">
-      <SideBar />
+      <div className="w-56 h-screen hidden md:block">
+        <SideBar />
+      </div>
+
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/order" element={<Order />} />

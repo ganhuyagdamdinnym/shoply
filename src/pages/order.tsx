@@ -16,7 +16,7 @@ function Order() {
   const handleToggle = (type: string) => {
     setOpenDropdown(openDropdown === type ? null : type);
   };
-  const orders = [
+  const orders: any = [
     {
       orderNumber: "SH0423",
       status: "цуцлагдсан",
@@ -65,10 +65,11 @@ function Order() {
             <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
               <Icon icon="material-symbols-light:search-rounded" width="20" />
             </div>
+
             <input
               type="text"
               placeholder="Захиа. #, нэр, имэйл, утасаар хайх..."
-              className="flex h-10 pl-9 w-full rounded-md py-2 sm:text-sm border border-[#888485]"
+              className="flex h-10 pl-9 w-full rounded-md py-2 sm:text-sm border border-[#e7e3e4]  focus:outline-none focus:border-blue-500 focus:border-2"
             />
           </div>
           <div className="items-center gap-2 hidden lg:flex">
@@ -78,7 +79,7 @@ function Order() {
                   <div key={type} className="relative">
                     <button
                       onClick={() => handleToggle(type)}
-                      className="flex justify-center items-center gap-1 border border-[#888485] py-1 px-3 rounded-lg"
+                      className="flex justify-center items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg"
                     >
                       <span className="text-[14px]">{options[type][0]}</span>
                       <Icon
@@ -111,76 +112,99 @@ function Order() {
             </div>
           </div>
         </div>
-        <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
-          <div className="relative w-full overflow-x-auto">
-            <table className="w-full caption-bottom text-sm">
-              <thead>
-                <tr className="bg-muted border-b border-[#e7e3e4]">
-                  <th className="h-10 px-2 text-left font-medium">
-                    Захиалгын #
-                  </th>
-                  <th className="h-10 px-2 text-left font-medium">Төлөв</th>
-                  <th className="h-10 px-2 text-left font-medium">Үнийн дүн</th>
-                  <th className="h-10 px-2 text-left font-medium">Хэрэглэгч</th>
-                  <th className="h-10 px-2 text-left font-medium">
-                    Захиалгын төрөл
-                  </th>
-                  <th className="h-10 px-2 text-left font-medium">
-                    Төлөх хэлбэр
-                  </th>
-                  <th className="h-10 px-2 text-left font-medium">
-                    Захиалсан огноо
-                  </th>
-                  <th className="h-10 px-2"></th>
-                </tr>
-              </thead>
-              <tbody className="bg-[#f5f4f4]">
-                {orders.map((order, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-[#e7e3e4] transition-colors"
-                  >
-                    <td className="px-2 py-2">{order.orderNumber}</td>
-                    <td
-                    // className={`px-2 py-2 font-semibold ${
-                    //   order.status == "цуцлагдсан"
-                    //     ? "text-[#b91c1c] bg-[]"
-                    //     : order.status == "амжилттай"
-                    //     ? "text-[green]"
-                    //     : ""
-                    // }`}
-                    >
-                      <p
-                        className={`px-2 py-2 font-semibold ${
-                          order.status == "цуцлагдсан"
-                            ? "text-[#b91c1c] bg-[fee2e2]"
-                            : order.status == "амжилттай"
-                            ? "text-[green]"
-                            : ""
-                        }`}
-                      >
-                        {order.status}
-                      </p>
-                    </td>
-                    <td className="px-2 py-2 text-[16px] font-medium">
-                      {order.price}₮
-                    </td>
-                    <td className="px-2 py-2 flex flex-col">
-                      <p className="font-medium"> {order.user}</p>
-                      <p>{order.userPhoneNumber}</p>
-                    </td>
-                    <td className="px-2 py-2 ">{order.orderType}</td>
-                    <td className="px-2 py-2 font-semibold">{order.type}</td>
-                    <td className="px-2 py-2">{order.orderDate}</td>
-                    <td className="px-2 py-2 text-right">
-                      <Icon icon="tabler:dots" width="24" />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {orders == "" ? (
+          <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
+            <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-lg border-dashed p-6 text-center text-balance md:p-12">
+              <div className="flex max-w-sm flex-col items-center gap-2 text-center">
+                <Icon
+                  icon="material-symbols-light:border-all-outline-rounded"
+                  width="32"
+                />
+                <div className="text-lg font-medium tracking-tight">
+                  Захиалга хоосон байна
+                </div>
+                <div className="text-[#71717b] [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4">
+                  Одоогоор захиалга бүртгэгдээгүй байна
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
+            <div className="relative w-full overflow-x-auto">
+              <table className="w-full caption-bottom text-sm">
+                <thead>
+                  <tr className="bg-muted border-b border-[#e7e3e4]">
+                    <th className="h-10 px-2 text-left font-medium">
+                      Захиалгын #
+                    </th>
+                    <th className="h-10 px-2 text-left font-medium">Төлөв</th>
+                    <th className="h-10 px-2 text-left font-medium">
+                      Үнийн дүн
+                    </th>
+                    <th className="h-10 px-2 text-left font-medium">
+                      Хэрэглэгч
+                    </th>
+                    <th className="h-10 px-2 text-left font-medium">
+                      Захиалгын төрөл
+                    </th>
+                    <th className="h-10 px-2 text-left font-medium">
+                      Төлөх хэлбэр
+                    </th>
+                    <th className="h-10 px-2 text-left font-medium">
+                      Захиалсан огноо
+                    </th>
+                    <th className="h-10 px-2"></th>
+                  </tr>
+                </thead>
+                <tbody className="bg-[#f5f4f4]">
+                  {orders?.map((order: any, index: any) => (
+                    <tr
+                      key={index}
+                      className="border-b border-[#e7e3e4] transition-colors"
+                    >
+                      <td className="px-2 py-2">{order.orderNumber}</td>
+                      <td
+                      // className={`px-2 py-2 font-semibold ${
+                      //   order.status == "цуцлагдсан"
+                      //     ? "text-[#b91c1c] bg-[]"
+                      //     : order.status == "амжилттай"
+                      //     ? "text-[green]"
+                      //     : ""
+                      // }`}
+                      >
+                        <p
+                          className={`px-2 py-2 font-semibold ${
+                            order.status == "цуцлагдсан"
+                              ? "text-[#b91c1c] bg-[fee2e2]"
+                              : order.status == "амжилттай"
+                              ? "text-[green]"
+                              : ""
+                          }`}
+                        >
+                          {order.status}
+                        </p>
+                      </td>
+                      <td className="px-2 py-2 text-[16px] font-medium">
+                        {order.price}₮
+                      </td>
+                      <td className="px-2 py-2 flex flex-col">
+                        <p className="font-medium"> {order.user}</p>
+                        <p>{order.userPhoneNumber}</p>
+                      </td>
+                      <td className="px-2 py-2 ">{order.orderType}</td>
+                      <td className="px-2 py-2 font-semibold">{order.type}</td>
+                      <td className="px-2 py-2">{order.orderDate}</td>
+                      <td className="px-2 py-2 text-right">
+                        <Icon icon="tabler:dots" width="24" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

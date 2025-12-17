@@ -15,7 +15,7 @@ const primeDashboard = [
 
 export const SideBar = () => {
   return (
-    <div className="w-56 h-screen bg-[#FBFBFB] px-4 border-r border-[#EAE9ED] hidden md:block fixe top-0 left-0">
+    <div className="w-48 h-screen bg-[#FBFBFB] px-4 border-r border-[#EAE9ED] hidden md:block fixed top-0 left-0">
       {primeDashboard.map((e) => (
         <NavLink
           key={e.name}
@@ -27,8 +27,16 @@ export const SideBar = () => {
             ${isActive ? "bg-gray-200 font-medium" : ""}`
           }
         >
-          <Icon icon={e.icon} width="16" />
-          <span className="text-[14px]">{e.text}</span>
+          {({ isActive }) => (
+            <>
+              <Icon
+                icon={e.icon}
+                width="16"
+                className={isActive ? "text-blue-500" : "text-gray-600"}
+              />
+              <span className={` text-[14px]`}>{e.text}</span>
+            </>
+          )}
         </NavLink>
       ))}
     </div>
