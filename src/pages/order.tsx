@@ -38,7 +38,7 @@ function Order() {
     },
   ];
   return (
-    <div className="w-screen h-screen p-4 flex flex-col gap-4">
+    <div className="w-screen h-screen p-4 flex flex-col gap-4 bg-[#f5f4f4]">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-2xl sm:text-3xl">Захиалга</p>
@@ -69,7 +69,7 @@ function Order() {
             <input
               type="text"
               placeholder="Захиа. #, нэр, имэйл, утасаар хайх..."
-              className="flex h-10 pl-9 w-full rounded-md py-2 sm:text-sm border border-[#e7e3e4]  focus:outline-none focus:border-blue-500 focus:border-2"
+              className="flex h-10 pl-9 w-full rounded-md py-2 bg-white sm:text-sm border border-[#e7e3e4]  focus:outline-none focus:border-blue-500 focus:border-2"
             />
           </div>
           <div className="items-center gap-2 hidden lg:flex">
@@ -79,7 +79,7 @@ function Order() {
                   <div key={type} className="relative">
                     <button
                       onClick={() => handleToggle(type)}
-                      className="flex justify-center items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg"
+                      className="flex justify-center bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg"
                     >
                       <span className="text-[14px]">{options[type][0]}</span>
                       <Icon
@@ -133,7 +133,7 @@ function Order() {
           <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
             <div className="relative w-full overflow-x-auto">
               <table className="w-full caption-bottom text-sm">
-                <thead>
+                <thead className="bg-white">
                   <tr className="bg-muted border-b border-[#e7e3e4]">
                     <th className="h-10 px-2 text-left font-medium">
                       Захиалгын #

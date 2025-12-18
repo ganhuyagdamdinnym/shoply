@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CreatingProductInfo } from "../components/creatingProductInfo";
 function CreateProduct() {
   return (
-    <div className="w-screen h-screen p-4 flex flex-col gap-4">
+    <div className="w-screen h-full p-4 flex flex-col gap-4 bg-[#f5f4f4]">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-2xl sm:text-3xl">Бараа нэмэх</p>
@@ -24,8 +24,8 @@ function CreateProduct() {
       </div>
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-full xl:col-span-8 flex flex-col gap-4">
-          <div className="bg-[#fcfcfc] border border-[#f5f4f4] rounded-xl p-4">
-            <div className="grid w-full items-center gap-1.5 !max-w-none">
+          <div className="bg-white border border-[#e7e3e4] rounded-xl p-4">
+            <div className="grid w-full items-center gap-1.5 max-w-none!">
               <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
                 Барааны гарчиг
                 <span className="text-gradient-to-r from-blue-500 to-indigo-400 -ml-1">
@@ -55,7 +55,7 @@ function CreateProduct() {
               </div>
             </div>
           </div>
-          <div className="bg-[#fcfcfc] border border-[#f5f4f4] rounded-xl p-4 pb-6">
+          <div className="bg-[#fcfcfc] border border-[#e7e3e4] rounded-xl p-4 pb-6">
             <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
               Барааны мэдээлэл
               <span className="text-gradient-to-r from-blue-500 to-indigo-400 -ml-1">

@@ -22,7 +22,7 @@ function Product() {
     },
   ];
   return (
-    <div className="w-screen h-screen p-4 flex flex-col gap-4">
+    <div className="w-screen h-screen p-4 flex flex-col gap-4 bg-[#f5f4f4]">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-2xl sm:text-3xl">
@@ -43,19 +43,19 @@ function Product() {
         </Link>
       </div>
       <div className="w-full items-center justify-between ">
-        <div className="relative w-[320px] h-[40px]">
+        <div className="relative w-[320px] h-10">
           <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
             <Icon icon="material-symbols-light:search-rounded" width="20" />
           </div>
           <input
             type="text"
             placeholder="Бараа нэрээр хайх..."
-            className="flex h-10 pl-9 w-full rounded-md py-2 sm:text-sm border border-[#e7e3e4]"
+            className="flex h-10 pl-9 bg-white w-full rounded-md py-2 sm:text-sm border border-[#e7e3e4] focus:outline-none focus:border-blue-500 focus:border-2"
           />
         </div>
-        <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
+        <div className="w-full mt-4 rounded-xl border border-[#e7e3e4]">
           <div className="relative w-full overflow-x-auto">
-            <table className="w-full caption-bottom text-sm">
+            <table className="w-full caption-bottom text-sm bg-white rounded-xl">
               <thead>
                 <tr className="bg-muted border-b border-[#e7e3e4]">
                   <th className="h-10 px-2 text-left font-medium">
@@ -71,7 +71,7 @@ function Product() {
                   <th className="h-10 px-2"></th>
                 </tr>
               </thead>
-              <tbody className="bg-[#f5f4f4]">
+              <tbody className="">
                 {products.map((product, index) => (
                   <tr
                     key={index}

@@ -9,6 +9,8 @@ import Brand from "./pages/brand.tsx";
 import { SideBar } from "./components/Sidebar.tsx";
 import CreateProduct from "./pages/productCreate.tsx";
 import CreateOrder from "./pages/createOrder.tsx";
+import CreateBrand from "./pages/createBrand.tsx";
+import Settings from "./pages/settings.tsx";
 createRoot(document.getElementById("root")!).render(
   // <StrictMode>
   //   <SideBar />
@@ -16,7 +18,7 @@ createRoot(document.getElementById("root")!).render(
   // </StrictMode>
   <Router>
     <div className="flex">
-      <div className="w-56 h-screen hidden md:block">
+      <div className="w-76 bg-[#f5f4f4] h-screen px-4 pt-2 hidden md:block ">
         <SideBar />
       </div>
 
@@ -28,6 +30,8 @@ createRoot(document.getElementById("root")!).render(
         <Route path="/brand" element={<Brand />} />
         <Route path="/product/create" element={<CreateProduct />} />
         <Route path="/order/create" element={<CreateOrder />} />
+        <Route path="/brand/create" element={<CreateBrand />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </div>
   </Router>

@@ -4,7 +4,7 @@ export const CreatingProductInfo = () => {
   return (
     <div className="mt-3">
       <div className="flex flex-col gap-8">
-        <div className="border border-[#f5f4f4] rounded-xl p-4 bg-[#ffffff]">
+        <div className="border border-[#e7e3e4] rounded-xl p-4 bg-[#ffffff]">
           <div className="flex flex-col sm:flex-row justify-between gap-1 sm:items-center">
             <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
               Барааны төрлийн зураг
