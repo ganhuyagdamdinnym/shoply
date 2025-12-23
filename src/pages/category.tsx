@@ -22,7 +22,7 @@ export default function Category() {
 
   return (
     <div className="overflow-x-auto p-4">
-      <table className="w-full border border-gray-200 text-sm rounded-md overflow-hidden">
+      {/* <table className="w-full border border-gray-200 text-sm rounded-md overflow-hidden">
         <thead className="bg-gray-100">
           <tr>
             <th className="border px-3 py-2 text-left">#</th>
@@ -47,7 +47,7 @@ export default function Category() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 }

@@ -130,8 +130,8 @@ function Order() {
             </div>
           </div>
         ) : (
-          <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
-            <div className="relative w-full overflow-x-auto">
+          <div className="w-full mt-4 rounded-xl border border-[#e7e3e4]">
+            <div className=" w-full overflow-x-auto rounded-xl">
               <table className="w-full caption-bottom text-sm">
                 <thead className="bg-white">
                   <tr className="bg-muted border-b border-[#e7e3e4]">
