@@ -4,7 +4,7 @@ import { RequireSettings } from "./components/requireSettings";
 import { LastOrders } from "./components/lastOrders";
 function App() {
   return (
-    <div className="h-full w-screen bg-[#f5f4f4] p-4 flex flex-col gap-2 sm:gap-4">
+    <div className="px-4 border border-[#e7e3e4] pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div>
         <p className="font-semibold text-2xl sm:text-3xl">
           Өдрийн мэнд, Санчир

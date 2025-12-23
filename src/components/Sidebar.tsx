@@ -22,9 +22,9 @@ const primeDashboard = [
     icon: "ph:flag-banner-fold-light",
     text: "Баннер удирдах",
   },
-  { name: "/admin", icon: "tabler:chart-circles", text: "Ажилтан удирдах" },
-  { name: "/branch", icon: "tabler:chart-circles", text: "Салбар удирдах" },
-  { name: "/aboutus", icon: "tabler:chart-circles", text: "Бидний тухай" },
+  { name: "/admin", icon: "mingcute:user-add-line", text: "Ажилтан удирдах" },
+  { name: "/branch", icon: "hugeicons:ice-cubes", text: "Салбар удирдах" },
+  { name: "/aboutus", icon: "ri:error-warning-line", text: "Бидний тухай" },
   //{ name: "/admin", icon: "tabler:chart-circles", text: "Ажилтан удирдах" },
 ];
 //bg-[#FBFBFB]

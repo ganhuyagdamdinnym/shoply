@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 
 const CreateBrand = () => {
   return (
-    <main className="px-4 pt-4 pb-16 mt-14 md:mt-0 md:px-6 md:py-6 md:max-w-8xl mx-auto w-full h-full bg-[#f5f4f4] ">
+    <main className="px-4 pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div className="max-w-md w-full mx-auto py-6 px-8 bg-white rounded-2xl border border-[#e7e3e4]">
         <h1 className="text-center font-gilroy text-xl font-semibold">
           Шинээр брэнд нэмэх
