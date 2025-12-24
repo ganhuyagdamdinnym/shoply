@@ -18,6 +18,7 @@ import Design from "./pages/design.tsx";
 import Banner from "./pages/banner.tsx";
 import AboutUs from "./pages/aboutUs.tsx";
 import Branch from "./pages/branch.tsx";
+import Account from "./pages/account.tsx";
 import { MobileSideBar } from "./components/mobileSideBar.tsx";
 function Root() {
   const [open, setOpen] = useState(false);
@@ -62,7 +63,7 @@ function Root() {
               z-50 transform transition-transform duration-300 md:hidden
               ${open ? "translate-x-0" : "-translate-x-full"}`}
           >
-            <MobileSideBar />
+            <MobileSideBar setOpen={setOpen} />
           </div>
 
           {/* ===== MAIN CONTENT (ЗӨВХӨН ЭНЭ SCROLL ХИЙНЭ) ===== */}
@@ -81,6 +82,7 @@ function Root() {
               <Route path="/banner" element={<Banner />} />
               <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/branch" element={<Branch />} />
+              <Route path="/account" element={<Account />} />
             </Routes>
           </main>
         </div>

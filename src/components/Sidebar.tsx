@@ -1,13 +1,13 @@
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const primeDashboard = [
   { name: "/", icon: "proicons:home", text: "Самбар" },
   {
     name: "/order",
-    icon: "material-symbols-light:border-all-outline-rounded",
+    icon: "fluent:border-all-24-regular",
     text: "Захиалга",
   },
   { name: "/product", icon: "fluent-mdl2:product", text: "Бүтээгдэхүүн" },
@@ -39,8 +39,6 @@ export const SideBar = () => {
   const handleClick = () => {
     if (isClick == false) {
       setIsClick(true);
-    } else {
-      setIsClick(false);
     }
   };
   useEffect(() => {
@@ -63,7 +61,7 @@ export const SideBar = () => {
       className="w-[250px] h-[calc(100vh-16px)] bg-white px-4
       border rounded-xl border-[#EAE9ED]
       shadow-xl
-      fixed top-2 left-2 hidden md:block relative"
+      fixed top-2 left-2 hidden md:block "
     >
       {/* LOGO */}
       <div className="h-14 flex items-center">
@@ -90,7 +88,7 @@ export const SideBar = () => {
                   <Icon
                     icon={e.icon}
                     width="16"
-                    className={isActive ? "text-blue-500" : "text-gray-600"}
+                    className={isActive ? "text-blue-500" : ""}
                   />
                   <span className="text-[14px]">{e.text}</span>
                 </>
@@ -123,7 +121,7 @@ export const SideBar = () => {
                   <Icon
                     icon={e.icon}
                     width="16"
-                    className={isActive ? "text-blue-500" : "text-gray-600"}
+                    className={isActive ? "text-blue-500" : ""}
                   />
                   <span className="text-[14px]">{e.text}</span>
                 </>
@@ -135,15 +133,20 @@ export const SideBar = () => {
       {isClick && (
         <div
           ref={profileRef}
-          className="absolute bottom-16 left-3 right-3 h-36
+          className="absolute bottom-16 left-3 right-3
           bg-white shadow-2xl border border-gray-300
-             rounded-xl flex flex-col items-center gap-3 px-3"
+             rounded-xl flex flex-col px-3 py-2"
         >
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <Link to="/account">
+            <div className="flex  items-center gap-2 w-full hover:bg-gray-100 py-1 rounded-sm px-1">
+              <Icon icon="solar:user-linear" width={16} />
+              <p className="text-black text-[14px]">Миний бүртгэл</p>
+            </div>
+          </Link>
+          <div className="flex  items-center gap-2 w-full hover:bg-gray-100 py-1 rounded-sm px-1 text-red-500">
+            <Icon icon="mingcute:exit-line" width={16} />
+            <p className=" text-[14px]">Гарах</p>
+          </div>
         </div>
       )}
 

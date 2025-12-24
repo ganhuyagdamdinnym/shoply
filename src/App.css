@@ -6,3 +6,11 @@
   --tw-gradient-stops: var(--tw-gradient-via-stops);
   --tw-gradient-to: var(--color-indigo-400);
 }
+
+input {
+  caret-shape: block;
+}
+
+.caret-block {
+  caret-shape: block;
+}

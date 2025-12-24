@@ -22,7 +22,7 @@ function CreateProduct() {
           </button>
         </Link>
       </div>
-      <div className="grid grid-cols-12 gap-4">
+      <div className="grid grid-cols-12 gap-4 max-w-[1400px] mx-auto">
         <div className="col-span-full xl:col-span-8 flex flex-col gap-4">
           <div className="bg-white border border-[#e7e3e4] rounded-xl p-4">
             <div className="grid w-full items-center gap-1.5 max-w-none!">
@@ -65,6 +65,7 @@ function CreateProduct() {
             <CreatingProductInfo />
           </div>
         </div>
+        <div className="col-span-full xl:col-span-4 flex flex-col gap-4"></div>
       </div>
     </div>
   );
