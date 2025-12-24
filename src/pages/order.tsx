@@ -38,7 +38,7 @@ function Order() {
     },
   ];
   return (
-    <div className="px-4 pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+    <div className="px-4 pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-2xl sm:text-3xl">Захиалга</p>
@@ -60,7 +60,7 @@ function Order() {
         </Link>
       </div>
       <div>
-        <div className="w-full flex items-center justify-between ">
+        <div className="w-full flex items-center justify-between mt-4 ">
           <div className="relative w-[320px] h-[40px]">
             <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
               <Icon icon="material-symbols-light:search-rounded" width="20" />
@@ -79,7 +79,7 @@ function Order() {
                   <div key={type} className="relative">
                     <button
                       onClick={() => handleToggle(type)}
-                      className="flex justify-center bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg"
+                      className="flex justify-center bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg w-30"
                     >
                       <span className="text-[14px]">{options[type][0]}</span>
                       <Icon
