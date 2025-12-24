@@ -65,7 +65,68 @@ function CreateProduct() {
             <CreatingProductInfo />
           </div>
         </div>
-        <div className="col-span-full xl:col-span-4 flex flex-col gap-4"></div>
+        <div className="col-span-full xl:col-span-4 flex flex-col gap-4">
+          <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
+            <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
+              Барааны төлөв
+              <span className="text-blue-500 -ml-1">*</span>
+            </label>
+            <div className="flex flex-col w-full gap-1.5 max-w-none! mt-3">
+              <button
+                // onClick={() => handleToggle(type)}
+                className="flex justify-between bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg w-full "
+              >
+                <span className="text-[14px]">Идэвхтэй</span>
+                <Icon
+                  icon="oui:arrow-down"
+                  width="14"
+                  color="#888485"
+                  className="mt-1"
+                />
+              </button>
+            </div>
+          </div>
+          <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
+            <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
+              Барааны ангилал
+              <span className="text-blue-500 -ml-1">*</span>
+            </label>
+            <div className="flex flex-col w-full gap-1.5 max-w-none! mt-3">
+              <button
+                // onClick={() => handleToggle(type)}
+                className="flex justify-between bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg w-full "
+              >
+                <span className="text-[14px]">Идэвхтэй</span>
+                <Icon
+                  icon="oui:arrow-down"
+                  width="14"
+                  color="#888485"
+                  className="mt-1"
+                />
+              </button>
+            </div>
+          </div>{" "}
+          <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
+            <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
+              Брэнд
+              <span className="text-blue-500 -ml-1">*</span>
+            </label>
+            <div className="flex flex-col w-full gap-1.5 max-w-none! mt-3">
+              <button
+                // onClick={() => handleToggle(type)}
+                className="flex justify-between bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg w-full "
+              >
+                <span className="text-[14px]">Идэвхтэй</span>
+                <Icon
+                  icon="oui:arrow-down"
+                  width="14"
+                  color="#888485"
+                  className="mt-1"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

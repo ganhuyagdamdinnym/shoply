@@ -23,19 +23,8 @@ const CreateOrder = () => {
           <p>Захиалга үүсгэх</p>
         </button>
       </div>
-      <div>
-        <div className="w-full items-center justify-between ">
-          <div className="relative w-[320px] h-[40px]">
-            <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
-              <Icon icon="material-symbols-light:search-rounded" width="20" />
-            </div>
-            <input
-              type="text"
-              placeholder="Захиа. #, нэр, имэйл, утасаар хайх..."
-              className="flex h-10 pl-9 w-full rounded-md py-2 sm:text-sm border border-[#e7e3e4]"
-            />
-          </div>
-        </div>
+      <div className="mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6"></div>
       </div>
     </div>
   );
