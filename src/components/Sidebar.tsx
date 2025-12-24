@@ -1,4 +1,6 @@
 import { Icon } from "@iconify/react";
+import { useEffect, useRef, useState } from "react";
+
 import { NavLink } from "react-router-dom";
 
 const primeDashboard = [
@@ -32,10 +34,35 @@ const systemHeader = [
 ];
 
 export const SideBar = () => {
+  const [isClick, setIsClick] = useState<boolean>(false);
+  const profileRef = useRef<HTMLDivElement | null>(null);
+  const handleClick = () => {
+    if (isClick == false) {
+      setIsClick(true);
+    } else {
+      setIsClick(false);
+    }
+  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target as Node)
+      ) {
+        setIsClick(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <div
       className="w-[250px] h-[calc(100vh-16px)] bg-white px-4
       border rounded-xl border-[#EAE9ED]
+      shadow-xl
       fixed top-2 left-2 hidden md:block relative"
     >
       {/* LOGO */}
@@ -105,16 +132,36 @@ export const SideBar = () => {
           ))}
         </div>
       </div>
+      {isClick && (
+        <div
+          ref={profileRef}
+          className="absolute bottom-16 left-3 right-3 h-36
+          bg-white shadow-2xl border border-gray-300
+             rounded-xl flex flex-col items-center gap-3 px-3"
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      )}
 
-      {/* 🔒 ХӨДӨЛГӨӨНГҮЙ ДОOД ХЭСЭГ */}
       <div
-        className="absolute bottom-3 left-3 right-3 h-16
-        bg-gray-100 rounded-xl flex items-center gap-3 px-3"
+        onClick={handleClick}
+        className="absolute bottom-0 left-3 right-3 h-16
+        hover:bg-gray-100
+         rounded-xl flex items-center gap-3 px-3"
       >
         <div className="w-9 h-9 rounded-full bg-gray-300 flex items-center justify-center text-xs">
           GD
         </div>
-        <span className="text-sm font-medium">G.Damdinnym</span>
+        <div className="flex flex-col">
+          <span className="text-sm font-medium">G.Damdinnym</span>
+          <span className="text-[12px] text-[#71717b] font-medium">
+            damdinnymg@gmail.com
+          </span>
+        </div>
       </div>
     </div>
   );
