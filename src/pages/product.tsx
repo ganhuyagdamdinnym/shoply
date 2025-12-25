@@ -54,8 +54,8 @@ function Product() {
             className="flex h-10 pl-9 bg-white w-full rounded-md py-2 sm:text-sm border border-[#e7e3e4] focus:outline-none focus:border-blue-500 focus:border-2"
           />
         </div>
-        <div className="w-full mt-4 rounded-xl border border-[#e7e3e4]">
-          <div className="relative w-full overflow-x-auto">
+        <div className="w-full mt-4 rounded-xl border border-[#e7e3e4] min-w-250">
+          <div className="relative w-full overflow-visible">
             <table className="w-full caption-bottom text-sm bg-white rounded-xl">
               <thead>
                 <tr className="bg-muted border-b border-[#e7e3e4]">

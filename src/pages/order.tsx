@@ -60,7 +60,7 @@ function Order() {
         </Link>
       </div>
       <div>
-        <div className="w-full flex items-center justify-between mt-4 ">
+        <div className="w-full flex items-center justify-between mt-4 min-w-200">
           <div className="relative w-[320px] h-[40px]">
             <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
               <Icon icon="material-symbols-light:search-rounded" width="20" />
@@ -130,7 +130,7 @@ function Order() {
             </div>
           </div>
         ) : (
-          <div className="w-full mt-4 rounded-xl border border-[#e7e3e4]">
+          <div className="w-full mt-4 rounded-xl border border-[#e7e3e4] min-w-250">
             <div className=" w-full overflow-x-auto rounded-xl">
               <table className="w-full caption-bottom text-sm">
                 <thead className="bg-white">

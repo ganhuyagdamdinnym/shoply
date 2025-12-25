@@ -21,20 +21,18 @@ import Branch from "./pages/branch.tsx";
 import Account from "./pages/account.tsx";
 import { MobileSideBar } from "./components/mobileSideBar.tsx";
 import Admin from "./pages/admin.tsx";
+import OrderDetails from "./pages/orderDetail.tsx";
 function Root() {
   const [open, setOpen] = useState(false);
 
   return (
     <Router>
-      {/* 🔒 BODY SCROLL-ИЙГ БҮРЭН ХААНА */}
       <div className="h-screen overflow-hidden bg-[#f5f4f4]">
         <div className="flex h-full">
-          {/* ===== DESKTOP SIDEBAR ===== */}
           <div className="hidden md:block w-[270px] flex-shrink-0">
             <SideBar />
           </div>
 
-          {/* ===== MOBILE HEADER ===== */}
           <div
             className="md:hidden fixed top-0 left-0 w-full h-[56px] z-40
             bg-back/50 border-b border-[#e7e3e4] backdrop-blur-lg
@@ -85,6 +83,7 @@ function Root() {
               <Route path="/branch" element={<Branch />} />
               <Route path="/account" element={<Account />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/orderdetails" element={<OrderDetails />} />
             </Routes>
           </main>
         </div>
