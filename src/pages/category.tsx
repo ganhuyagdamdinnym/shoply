@@ -1,7 +1,6 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
-// Өгөгдлийн төрөл
 interface ICategory {
   id: string;
   name: string;
@@ -23,110 +22,142 @@ const CategoryPage = () => {
     },
   ]);
 
+  // Modal & Edit states
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeParentId, setActiveParentId] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState("");
+  const [activeParentId, setActiveParentId] = useState<string | null>(null);
+  const [editTarget, setEditTarget] = useState<ICategory | null>(null);
 
-  // Шинэ ангилал нэмэх функц
-  const handleAddCategory = () => {
+  // Нэмэх эсвэл Засах үйлдлийг нэгтгэсэн функц
+  const handleSave = () => {
     if (!inputValue.trim()) return;
 
-    const newCat: ICategory = {
-      id: Math.random().toString(36).substr(2, 9),
-      name: inputValue,
-      children: [],
-    };
-
-    if (activeParentId === null) {
-      // Үндсэн ангилал нэмэх
-      setCategories([...categories, newCat]);
-    } else {
-      // Дэд ангилал нэмэх (Recursive хайлт)
-      const updateTree = (list: ICategory[]): ICategory[] =>
+    if (editTarget) {
+      // --- ЗАСАХ ЛОГИК ---
+      const updateName = (list: ICategory[]): ICategory[] =>
         list.map((c) =>
-          c.id === activeParentId
-            ? { ...c, children: [...c.children, newCat] }
-            : { ...c, children: updateTree(c.children) }
+          c.id === editTarget.id
+            ? { ...c, name: inputValue }
+            : { ...c, children: updateName(c.children) }
         );
-      setCategories(updateTree(categories));
+      setCategories(updateName(categories));
+    } else {
+      // --- НЭМЭХ ЛОГИК ---
+      const newCat: ICategory = {
+        id: Math.random().toString(36).substr(2, 9),
+        name: inputValue,
+        children: [],
+      };
+      if (activeParentId === null) {
+        setCategories([...categories, newCat]);
+      } else {
+        const addChild = (list: ICategory[]): ICategory[] =>
+          list.map((c) =>
+            c.id === activeParentId
+              ? { ...c, children: [...c.children, newCat] }
+              : { ...c, children: addChild(c.children) }
+          );
+        setCategories(addChild(categories));
+      }
     }
+    closeModal();
+  };
 
-    setInputValue("");
+  // Устгах функц
+  const handleDelete = (id: string) => {
+    if (confirm("Та энэ ангиллыг устгахдаа итгэлтэй байна уу?")) {
+      const removeNode = (list: ICategory[]): ICategory[] =>
+        list
+          .filter((c) => c.id !== id)
+          .map((c) => ({ ...c, children: removeNode(c.children) }));
+      setCategories(removeNode(categories));
+    }
+  };
+
+  const closeModal = () => {
     setIsModalOpen(false);
+    setInputValue("");
     setActiveParentId(null);
+    setEditTarget(null);
+  };
+
+  const openEditModal = (cat: ICategory) => {
+    setEditTarget(cat);
+    setInputValue(cat.name);
+    setIsModalOpen(true);
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f4f4] p-4 md:p-8 font-sans">
+    <div className="min-h-screen bg-[#f5f4f4] p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
-        {/* Толгой хэсэг */}
         <div className="mb-8">
-          <h1 className="text-2xl md:text-3xl font-bold text-[#1b1718]">
+          <h1 className="text-3xl font-bold text-[#1b1718]">
             Бүтээгдэхүүний ангилал
           </h1>
-          <p className="text-gray-500 text-sm md:text-base">
-            Нийт бараа бүтээгдэхүүнүүдийн ангилал
-          </p>
+          <p className="text-gray-500">Нийт бараа бүтээгдэхүүнүүдийн ангилал</p>
         </div>
 
-        {/* Ангилалын жагсаалт */}
         <div className="space-y-4">
           {categories.map((cat) => (
             <CategoryItem
               key={cat.id}
               category={cat}
               level={0}
-              onAdd={(id) => {
+              onAdd={(id: any) => {
                 setActiveParentId(id);
                 setIsModalOpen(true);
               }}
+              onEdit={openEditModal}
+              onDelete={handleDelete}
             />
           ))}
         </div>
 
-        {/* Үндсэн ангилал нэмэх товч */}
         <button
-          onClick={() => {
-            setActiveParentId(null);
-            setIsModalOpen(true);
-          }}
-          className="w-full mt-6 py-4 bg-[#5c7cfa] hover:bg-[#4c6ef5] text-white rounded-xl flex items-center justify-center gap-2 font-medium transition-all shadow-lg shadow-blue-200/50 active:scale-[0.98]"
+          onClick={() => setIsModalOpen(true)}
+          className="w-full mt-6 py-4 bg-[#5c7cfa] hover:bg-[#4c6ef5] text-white rounded-xl flex items-center justify-center gap-2 font-medium transition-all shadow-lg"
         >
-          <Icon icon="gridicons:add-outline" width={24} />
-          Ангилал нэмэх
+          <Icon icon="gridicons:add-outline" width={24} /> Ангилал нэмэх
         </button>
       </div>
 
-      {/* Нэмэх Модал */}
+      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="bg-white p-6 rounded-2xl w-full max-w-sm shadow-2xl animate-in fade-in zoom-in duration-200">
-            <h3 className="text-lg font-bold mb-1 text-gray-800">
-              {activeParentId ? "Дэд ангилал нэмэх" : "Үндсэн ангилал нэмэх"}
-            </h3>
-            <p className="text-sm text-gray-500 mb-4">
-              Ангилалын нэр оруулна уу
+          <div className="bg-white p-6 rounded-2xl w-full max-w-sm shadow-2xl">
+            <div className="flex justify-between items-center mb-1">
+              <h3 className="text-xl font-bold">
+                {editTarget ? "Ангилал засах" : "Ангилал нэмэх"}
+              </h3>
+              <button onClick={closeModal}>
+                <Icon icon="iconamoon:close" width={24} />
+              </button>
+            </div>
+            <p className="text-sm text-gray-500 mb-6">
+              Ангилалын мэдээллийг {editTarget ? "засах" : "оруулах"}
             </p>
 
+            <label className="text-sm font-semibold mb-2 block">
+              Ангилалын нэр <span className="text-blue-500">*</span>
+            </label>
             <input
               autoFocus
-              className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-              placeholder="Жишээ: Өвлийн гутал"
+              className="w-full border-2 border-blue-500 rounded-xl px-4 py-3 outline-none"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleAddCategory()}
+              onKeyDown={(e) => e.key === "Enter" && handleSave()}
             />
 
-            <div className="flex justify-end gap-3 mt-6">
+            <div className="flex justify-end gap-3 mt-8">
               <button
-                onClick={() => setIsModalOpen(false)}
-                className="px-5 py-2.5 text-gray-500 font-medium hover:bg-gray-50 rounded-lg transition-colors"
+                onClick={closeModal}
+                className="px-6 py-2.5 bg-gray-100 rounded-xl font-semibold"
               >
                 Цуцлах
               </button>
               <button
-                onClick={handleAddCategory}
-                className="px-6 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md shadow-blue-100"
+                onClick={handleSave}
+                className="px-6 py-2.5 bg-[#5c7cfa] text-white rounded-xl font-semibold"
               >
                 Хадгалах
               </button>
@@ -138,62 +169,89 @@ const CategoryPage = () => {
   );
 };
 
-// --- Дэд Компонент (Recursive Item) ---
+// --- Item Component with Dropdown ---
 
-const CategoryItem = ({
-  category,
-  level,
-  onAdd,
-}: {
-  category: ICategory;
-  level: number;
-  onAdd: (id: string) => void;
-}) => {
+const CategoryItem = ({ category, level, onAdd, onEdit, onDelete }: any) => {
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Гадна дарахад цэс хаах
+  useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      if (menuRef.current && !menuRef.current.contains(e.target))
+        setShowMenu(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div
-      className="w-full transition-all duration-300"
-      style={{
-        paddingLeft: level > 0 ? `${Math.min(level * 32, 100)}px` : "0px",
-      }}
-    >
-      <div className="flex items-center justify-between bg-white border border-gray-100 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+    <div style={{ paddingLeft: `${level * 40}px` }}>
+      <div className="flex items-center justify-between bg-white border border-gray-100 p-4 rounded-xl shadow-sm mb-4 relative">
         <div className="flex items-center gap-4">
-          {/* Чирэх дүрсний оронд жагсаалтын цэг эсвэл зүгээр хоосон зай */}
-          <div className="text-gray-300 group-hover:text-gray-400">
-            <Icon icon="ph:dots-six-vertical-bold" width={20} />
-          </div>
-          <span className="text-[16px] font-medium text-gray-800 tracking-tight">
-            {category.name}
-          </span>
+          <Icon
+            icon="ph:dots-six-vertical-bold"
+            className="text-gray-300"
+            width={20}
+          />
+          <span className="font-medium text-gray-800">{category.name}</span>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-3">
-          <button
-            onClick={() => onAdd(category.id)}
-            className="p-1.5 text-blue-500 hover:bg-blue-50 rounded-full transition-colors"
-            title="Дэд ангилал нэмэх"
-          >
-            <Icon icon="gridicons:add-outline" width={22} />
-          </button>
-          <button className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-full transition-colors">
-            <Icon icon="bi:three-dots" width={20} />
-          </button>
+        <div className="flex items-center gap-2">
+          {level < 2 && ( // Жишээ нь 3-р түвшнээс цааш нэмэхгүй бол
+            <button
+              onClick={() => onAdd(category.id)}
+              className="p-1.5 text-blue-500 hover:bg-blue-50 rounded-full"
+            >
+              <Icon icon="gridicons:add-outline" width={22} />
+            </button>
+          )}
+
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              className="p-1.5 text-gray-400 hover:bg-gray-50 rounded-full"
+            >
+              <Icon icon="bi:three-dots" width={20} />
+            </button>
+
+            {/* Зураг дээрх шиг Dropdown цэс */}
+            {showMenu && (
+              <div className="absolute right-0 top-10 w-32 bg-white rounded-xl shadow-xl border border-gray-100 z-10 py-1 overflow-hidden">
+                <button
+                  onClick={() => {
+                    onEdit(category);
+                    setShowMenu(false);
+                  }}
+                  className="w-full flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
+                >
+                  <Icon icon="akar-icons:edit" /> Засах
+                </button>
+                <button
+                  onClick={() => {
+                    onDelete(category.id);
+                    setShowMenu(false);
+                  }}
+                  className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                >
+                  <Icon icon="mi:delete" /> Устгах
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
-      {/* Дэд ангилалууд байвал өөрийгөө дахин дуудна */}
-      {category.children.length > 0 && (
-        <div className="mt-4 space-y-4">
-          {category.children.map((child) => (
-            <CategoryItem
-              key={child.id}
-              category={child}
-              level={level + 1}
-              onAdd={onAdd}
-            />
-          ))}
-        </div>
-      )}
+      {category.children.map((child: any) => (
+        <CategoryItem
+          key={child.id}
+          category={child}
+          level={level + 1}
+          onAdd={onAdd}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      ))}
     </div>
   );
 };
