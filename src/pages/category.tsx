@@ -1,85 +1,201 @@
 import { Icon } from "@iconify/react";
-import { useState, useRef } from "react";
-const categorList = [{}];
-const Category = () => {
-  const [addCategoryStatus, setAddCategoryStatus] = useState<boolean>(false);
-  return (
-    <div className="px-4 pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
-      {addCategoryStatus && (
-        <>
-          {/* Overlay — ЗӨВХӨН ЭНД дархад хаагдана */}
-          <div
-            className="fixed inset-0 z-40 bg-black/50"
-            onClick={() => setAddCategoryStatus(false)}
-          />
+import { useState } from "react";
 
-          {/* Modal */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="
-          pointer-events-auto
-          bg-white hidden md:block
-          w-full max-w-[calc(100%-2rem)] md:max-w-130
-          rounded-lg border border-[#f5f4f4] p-6 shadow-lg
-        "
-            >
-              <h2 className="text-lg font-semibold">Ангилал нэмэх</h2>
-              <p className="text-sm text-[#71717b]">
-                Ангилалын нэрийг оруулна уу
-              </p>
-              <div className="flex flex-col gap-2 p-1 mt-2">
-                <div className="grid w-full items-center gap-1.5">
-                  <label className="flex items-center gap-2 text-sm font-medium mb-1">
-                    Ангилалын нэр <span className="text-blue-500">*</span>{" "}
-                  </label>
-                  <input
-                    placeholder="Ангилалын нэр"
-                    className="flex h-10 w-full rounded-md border border-[#e7e3e4] bg-white px-3 py-2 sm:text-sm focus:outline-none focus:border-blue-500 focus:border-2"
-                  />
-                </div>
-              </div>
-              <div className="col-span-full flex justify-end mt-4 gap-4">
-                <button
-                  onClick={() => setAddCategoryStatus(false)}
-                  className="bg-[#f5f4f4] text-[#1b1718] inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 px-4 py-1  "
-                >
-                  Цуцлах
-                </button>
-                <button className="text-white inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-blue-500 to-indigo-400  h-8 px-4 py-1  ">
-                  хадгалах
-                </button>
-              </div>
+// Өгөгдлийн төрөл
+interface ICategory {
+  id: string;
+  name: string;
+  children: ICategory[];
+}
+
+const CategoryPage = () => {
+  const [categories, setCategories] = useState<ICategory[]>([
+    {
+      id: "1",
+      name: "Гутал",
+      children: [
+        {
+          id: "1-1",
+          name: "Пүүз",
+          children: [{ id: "1-1-1", name: "test", children: [] }],
+        },
+      ],
+    },
+  ]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeParentId, setActiveParentId] = useState<string | null>(null);
+  const [inputValue, setInputValue] = useState("");
+
+  // Шинэ ангилал нэмэх функц
+  const handleAddCategory = () => {
+    if (!inputValue.trim()) return;
+
+    const newCat: ICategory = {
+      id: Math.random().toString(36).substr(2, 9),
+      name: inputValue,
+      children: [],
+    };
+
+    if (activeParentId === null) {
+      // Үндсэн ангилал нэмэх
+      setCategories([...categories, newCat]);
+    } else {
+      // Дэд ангилал нэмэх (Recursive хайлт)
+      const updateTree = (list: ICategory[]): ICategory[] =>
+        list.map((c) =>
+          c.id === activeParentId
+            ? { ...c, children: [...c.children, newCat] }
+            : { ...c, children: updateTree(c.children) }
+        );
+      setCategories(updateTree(categories));
+    }
+
+    setInputValue("");
+    setIsModalOpen(false);
+    setActiveParentId(null);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#f5f4f4] p-4 md:p-8 font-sans">
+      <div className="max-w-4xl mx-auto">
+        {/* Толгой хэсэг */}
+        <div className="mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-[#1b1718]">
+            Бүтээгдэхүүний ангилал
+          </h1>
+          <p className="text-gray-500 text-sm md:text-base">
+            Нийт бараа бүтээгдэхүүнүүдийн ангилал
+          </p>
+        </div>
+
+        {/* Ангилалын жагсаалт */}
+        <div className="space-y-4">
+          {categories.map((cat) => (
+            <CategoryItem
+              key={cat.id}
+              category={cat}
+              level={0}
+              onAdd={(id) => {
+                setActiveParentId(id);
+                setIsModalOpen(true);
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Үндсэн ангилал нэмэх товч */}
+        <button
+          onClick={() => {
+            setActiveParentId(null);
+            setIsModalOpen(true);
+          }}
+          className="w-full mt-6 py-4 bg-[#5c7cfa] hover:bg-[#4c6ef5] text-white rounded-xl flex items-center justify-center gap-2 font-medium transition-all shadow-lg shadow-blue-200/50 active:scale-[0.98]"
+        >
+          <Icon icon="gridicons:add-outline" width={24} />
+          Ангилал нэмэх
+        </button>
+      </div>
+
+      {/* Нэмэх Модал */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white p-6 rounded-2xl w-full max-w-sm shadow-2xl animate-in fade-in zoom-in duration-200">
+            <h3 className="text-lg font-bold mb-1 text-gray-800">
+              {activeParentId ? "Дэд ангилал нэмэх" : "Үндсэн ангилал нэмэх"}
+            </h3>
+            <p className="text-sm text-gray-500 mb-4">
+              Ангилалын нэр оруулна уу
+            </p>
+
+            <input
+              autoFocus
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              placeholder="Жишээ: Өвлийн гутал"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleAddCategory()}
+            />
+
+            <div className="flex justify-end gap-3 mt-6">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="px-5 py-2.5 text-gray-500 font-medium hover:bg-gray-50 rounded-lg transition-colors"
+              >
+                Цуцлах
+              </button>
+              <button
+                onClick={handleAddCategory}
+                className="px-6 py-2.5 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors shadow-md shadow-blue-100"
+              >
+                Хадгалах
+              </button>
             </div>
           </div>
-        </>
-      )}
-
-      <div>
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-x-2 gap-y-4">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl sm:text-3xl font-semibold font-gilroy line-clamp-1 break-all">
-              Бүтээгдэхүүний ангилал
-            </h1>
-            <p className="text-[#71717b] text-sm line-clamp-1 break-all">
-              Нийт бараа бүтээгдэхүүнүүдийн ангилал
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setAddCategoryStatus(true)}
-              className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
-            >
-              <Icon icon="gridicons:add-outline" width={20} />
-              <p>Ангилал нэмэх</p>
-            </button>
-          </div>
         </div>
-        <div className="mt-4"></div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default Category;
+// --- Дэд Компонент (Recursive Item) ---
+
+const CategoryItem = ({
+  category,
+  level,
+  onAdd,
+}: {
+  category: ICategory;
+  level: number;
+  onAdd: (id: string) => void;
+}) => {
+  return (
+    <div
+      className="w-full transition-all duration-300"
+      style={{
+        paddingLeft: level > 0 ? `${Math.min(level * 32, 100)}px` : "0px",
+      }}
+    >
+      <div className="flex items-center justify-between bg-white border border-gray-100 p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
+        <div className="flex items-center gap-4">
+          {/* Чирэх дүрсний оронд жагсаалтын цэг эсвэл зүгээр хоосон зай */}
+          <div className="text-gray-300 group-hover:text-gray-400">
+            <Icon icon="ph:dots-six-vertical-bold" width={20} />
+          </div>
+          <span className="text-[16px] font-medium text-gray-800 tracking-tight">
+            {category.name}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2 md:gap-3">
+          <button
+            onClick={() => onAdd(category.id)}
+            className="p-1.5 text-blue-500 hover:bg-blue-50 rounded-full transition-colors"
+            title="Дэд ангилал нэмэх"
+          >
+            <Icon icon="gridicons:add-outline" width={22} />
+          </button>
+          <button className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-full transition-colors">
+            <Icon icon="bi:three-dots" width={20} />
+          </button>
+        </div>
+      </div>
+
+      {/* Дэд ангилалууд байвал өөрийгөө дахин дуудна */}
+      {category.children.length > 0 && (
+        <div className="mt-4 space-y-4">
+          {category.children.map((child) => (
+            <CategoryItem
+              key={child.id}
+              category={child}
+              level={level + 1}
+              onAdd={onAdd}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CategoryPage;
