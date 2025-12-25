@@ -20,6 +20,7 @@ import AboutUs from "./pages/aboutUs.tsx";
 import Branch from "./pages/branch.tsx";
 import Account from "./pages/account.tsx";
 import { MobileSideBar } from "./components/mobileSideBar.tsx";
+import Admin from "./pages/admin.tsx";
 function Root() {
   const [open, setOpen] = useState(false);
 
@@ -83,6 +84,7 @@ function Root() {
               <Route path="/aboutUs" element={<AboutUs />} />
               <Route path="/branch" element={<Branch />} />
               <Route path="/account" element={<Account />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           </main>
         </div>

@@ -1,12 +1,13 @@
 import { Icon } from "@iconify/react";
 import "../App.css";
 import { Link } from "react-router-dom";
+import { ProductTable } from "../components/productTable";
 
 function Product() {
   const products = [
     {
       productName: "Daimaagiin arisam gutal",
-      productImage: "hjadsj",
+      productImage: "jordan.png",
       status: "идэвхтэй",
       price: 10000,
       uldegdel: 40,
@@ -14,7 +15,7 @@ function Product() {
     },
     {
       productName: "daimaagiin oroolt",
-      productImage: "hjadsj",
+      productImage: "jordan.png",
       status: "архив",
       price: 10000,
       uldegdel: 30,
@@ -73,37 +74,15 @@ function Product() {
               </thead>
               <tbody className="">
                 {products.map((product, index) => (
-                  <tr
+                  <ProductTable
                     key={index}
-                    className="border-b border-[#e7e3e4] transition-colors"
-                  >
-                    <td className="px-2 py-2">
-                      <input type="checkbox" />
-                    </td>
-                    <td className="px-2 py-2 flex items-center gap-2">
-                      <img src="jordan.png" width="52" />
-                      {product.productName}
-                    </td>
-                    <td
-                      className={`px-2 py-2 font-semibold ${
-                        product.status == "идэвхтэй"
-                          ? "text-[green]"
-                          : product.status == "архив"
-                          ? "text-amber-500"
-                          : ""
-                      }`}
-                    >
-                      {product.status}{" "}
-                    </td>
-                    <td className="px-2 py-2 text-[16px] font-medium ">
-                      {product.price}₮
-                    </td>
-                    <td className="px-2 py-2">{product.uldegdel}ш үлдсэн</td>
-                    <td className="px-2 py-2">{product.category}</td>
-                    <td className="px-2 py-2 text-right">
-                      <Icon icon="tabler:dots" width="24" />
-                    </td>
-                  </tr>
+                    name={product.productName}
+                    image={product.productImage}
+                    status={product.status}
+                    price={product.price}
+                    category={product.category}
+                    uldegdel={product.uldegdel}
+                  />
                 ))}
               </tbody>
             </table>

@@ -20,10 +20,23 @@ export const BackgroundInfo = () => {
           </div>
           <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4 px-0">
             <dt className="text-sm/6 font-medium flex items-center">
-              Дэлгүүрийн нэр
+              Холбоо барих дугаар
             </dt>
             <dd className="mt-1 flex text-sm/6 sm:col-span-2 sm:mt-0 items-center justify-between">
-              <span>Shoply</span>
+              <span>80444040</span>
+              <span>
+                <button className="bg-[#1b1718]/10 h-10 px-4 py-2 inline-flex items-center cursor-pointer text-sm justify-center rounded-md">
+                  Засах
+                </button>
+              </span>
+            </dd>
+          </div>
+          <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4 px-0">
+            <dt className="text-sm/6 font-medium flex items-center">
+              Холбоо барих дугаар
+            </dt>
+            <dd className="mt-1 flex text-sm/6 sm:col-span-2 sm:mt-0 items-center justify-between">
+              <span>80444040</span>
               <span>
                 <button className="bg-[#1b1718]/10 h-10 px-4 py-2 inline-flex items-center cursor-pointer text-sm justify-center rounded-md">
                   Засах
