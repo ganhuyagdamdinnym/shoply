@@ -59,11 +59,68 @@ const OrderDetails = () => {
               </div>
               <div className="flex justify-end mt-4">
                 <button className="inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium disabled:opacity-50 bg-[#f5f5f5] text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2  ">
+                  <Icon icon="mage:box-3d-minus" width={20} />
                   Бараа буцаах
                 </button>
               </div>
             </div>
-            <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white"></div>
+            <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
+              <h1 className="font-gilroy font-semibold text-lg px-2">
+                Төлбөрийн мэдээлэл
+              </h1>
+              <div className="rounded-xl bg-[#f5f4f4] border border-[#f5f4f4] px-3 py-4 flex flex-col gap-2 mt-2">
+                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 pb-4 text-sm px-2">
+                  <div>
+                    <dt className="font-medium">Төлбөрийн хэлбэр</dt>
+                    <dd className="text-[#71717b] mt-2">
+                      <div className="inline-flex items-center justify-center font-gilroy font-semibold bg-muted text-[#0b0809] text-base px-4 py-1.5 rounded-lg">
+                        Дансаар шилжүүлэх
+                      </div>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="font-medium">Зааварчилгаа</dt>
+                    <dd className="mt-2 text-[#71717b] font-medium flex gap-2">
+                      <div>
+                        Дансаа шалгахдаа
+                        <strong>SH25570573</strong>
+                        утгатай гүйлгээ
+                        <strong>294,000₮</strong>
+                        үнийн дүнгээр шилжүүлсэн байвал доорх
+                        <strong>Төлсөн болгох</strong>
+                        товч дээр дарна уу
+                      </div>
+                    </dd>
+                  </div>
+                </dl>
+                <dl className="space-y-3 border-t border-[#e7e3e4] pt-4 text-sm">
+                  <div className="flex justify-between px-2">
+                    <dt className="flex font-medium">Үнийн дүн</dt>
+                    <dt className="font-medium text-[#71717b] font-medium">
+                      289,000₮
+                    </dt>
+                  </div>
+                  <div className="flex justify-between px-2">
+                    <dt className="flex font-medium">Хямдрал</dt>
+                    <dt className="font-medium text-[#71717b] font-medium">
+                      289,000₮
+                    </dt>
+                  </div>{" "}
+                  <div className="flex justify-between px-2">
+                    <dt className="flex font-medium">Хүргэлт</dt>
+                    <dt className="font-medium text-[#71717b] font-medium">
+                      289,000₮
+                    </dt>
+                  </div>{" "}
+                  <div className="flex justify-between px-2">
+                    <dt className="font-semibold text-base font-gilroy">
+                      Нийт төлөх үнэ
+                    </dt>
+                    <dt className="font-semibold text-base">289,000₮</dt>
+                  </div>
+                </dl>
+              </div>
+            </div>
             <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
               <h1 className="font-gilroy font-semibold text-lg px-2">
                 Тэмдэглэл үлдээх
@@ -156,6 +213,89 @@ const OrderDetails = () => {
                   </div>
                   <p>yaraltai yvah</p>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-span-1 xl:col-span-4 flex flex-col gap-6">
+            <div className="rounded-xl border  border-[#e7e3e4] bg-white p-2 flex flex-col gap-4 py-4">
+              <div>
+                <h1 className="font-gilroy font-semibold text-lg px-2 mb-1">
+                  Хэрэглэгчийн мэдээлэл
+                </h1>
+                <div className="flex gap-2 items-center justify-between px-2 py-1.5 hover:bg-[#f5f4f4] rounded-lg">
+                  <div className="font-medium text-sm">Username</div>
+                  <Icon
+                    icon="lucide:copy"
+                    width={16}
+                    className="lucide lucide-copy cursor-pointer text-[#71717b] hover:text-black transition-all duration-200"
+                  />
+                </div>
+                <div className="flex gap-2 items-center justify-between px-2 py-1.5 hover:bg-[#f5f4f4] rounded-lg">
+                  <div className="font-medium text-sm">gmail</div>
+                  <Icon
+                    icon="lucide:copy"
+                    width={16}
+                    className="lucide lucide-copy cursor-pointer text-[#71717b] hover:text-black transition-all duration-200"
+                  />
+                </div>
+                <div className="flex gap-2 items-center justify-between px-2 py-1.5 hover:bg-[#f5f4f4] rounded-lg">
+                  <div className="font-medium text-sm">dugaar</div>
+                  <Icon
+                    icon="lucide:copy"
+                    width={16}
+                    className="lucide lucide-copy cursor-pointer text-[#71717b] hover:text-black transition-all duration-200"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="rounded-xl border  border-[#e7e3e4] bg-white p-2 flex flex-col gap-4 py-4">
+              <div className="px-2 flex flex-col gap-2 text-sm">
+                <h1 className="font-gilroy font-semibold text-lg">
+                  Хүргэлтийн төрөл
+                </h1>
+                <div className="inline-flex items-center justify-center font-gilroy font-semibold bg-[#dbeafe] text-[#3b82f6] text-base px-4 py-1.5 rounded-lg">
+                  Хүргэлтээр
+                </div>
+              </div>
+              <div className="px-2 flex flex-col gap-2 text-sm">
+                <h1 className="font-gilroy font-semibold text-lg">
+                  Хүргүүлэх хаягийн мэдээлэл
+                </h1>
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-[#71717b]">Хаягийн төрөл:</p>
+                  <p className="font-medium">Орон сууц </p>
+                </div>
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-[#71717b]">Хот/аймаг:</p>
+                  <p className="font-medium">Орон сууц </p>
+                </div>{" "}
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-[#71717b]">Дүүрэг/сум:</p>
+                  <p className="font-medium">Орон сууц </p>
+                </div>{" "}
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-[#71717b]">Хороо/баг:</p>
+                  <p className="font-medium">Орон сууц </p>
+                </div>{" "}
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-[#71717b]">Байр:</p>
+                  <p className="font-medium">Орон сууц </p>
+                </div>
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-[#71717b]">Тоот:</p>
+                  <p className="font-medium">Орон сууц </p>
+                </div>
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-[#71717b]">Нэмэлт мэдээлэл:</p>
+                  <p className="font-medium">Орон сууц </p>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-xl border  border-[#e7e3e4] bg-white p-2 flex flex-col gap-4 py-4 mb-4">
+              <div>
+                <h1 className="font-gilroy font-semibold text-lg">
+                  Захиалгын үйл явц
+                </h1>
               </div>
             </div>
           </div>
