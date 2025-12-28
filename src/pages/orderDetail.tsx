@@ -64,7 +64,100 @@ const OrderDetails = () => {
               </div>
             </div>
             <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white"></div>
-            <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white"></div>
+            <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
+              <h1 className="font-gilroy font-semibold text-lg px-2">
+                Тэмдэглэл үлдээх
+              </h1>
+              <p className="text-sm px-2 text-[#71717b] py-1">
+                Бусад ажилтнуудад энэ захиалгын тухай тэмдэглэл үлдээх боломжтой
+              </p>
+              <div className="max-w-2xl mx-auto mt-6 w-full">
+                <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
+                  {/* Toolbar */}
+                  <div className="flex items-center gap-3 p-2 ">
+                    <Icon
+                      icon="mdi:format-bold"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:format-italic"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:format-underline"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:link-variant"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:link-variant-off"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:format-list-bulleted"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:ruler"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:undo"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                    <Icon
+                      icon="mdi:redo"
+                      className="cursor-pointer"
+                      width={20}
+                    />
+                  </div>
+
+                  {/* Textarea */}
+                  <textarea
+                    placeholder="Энд тэмдэглэлээ бичнэ үү..."
+                    className="w-full min-h-[160px] mt-3 resize-none bg-[#f5f4f4] rounded-lg p-3 text-sm outline-none placeholder:text-[#a1a1aa]"
+                  />
+
+                  {/* Save Button */}
+                  <div className="flex justify-end mt-4">
+                    <button className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-500 to-indigo-400 px-4 py-2 text-white text-sm font-medium">
+                      <Icon icon="uil:save" width="20" />
+                      Хадгалах
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2 mt-2">
+                <div className="flex flex-col gap-2 rounded-xl bg-[#f5f4f4] border border-[#f5f4f4] p-4 relative">
+                  <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 bg-green-500 rounded-full"></div>
+                    <div className="flex flex-col">
+                      <div className="font-semibold font-gilroy sm:text-lg line-clamp-1">
+                        Ганболд Санчир
+                      </div>
+                      <div className="text-xs font-medium text-[#71717b] -mt-0.5 line-clamp-1">
+                        info@infitech.mn
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-sm text-[#71717b]">
+                    2025 оны 12-р сарын 15 16:17
+                  </div>
+                  <p>yaraltai yvah</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
