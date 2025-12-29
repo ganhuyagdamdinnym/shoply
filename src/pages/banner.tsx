@@ -1,7 +1,14 @@
 import { Icon } from "@iconify/react";
+import { AddBanner } from "../components/addBanner";
+import { useState } from "react";
 const Banner = () => {
+  const [addBannerStatus, setAddbannerStatus] = useState<boolean>(false);
   return (
     <div className="px-4 pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+      {addBannerStatus == true ? (
+        <AddBanner setAddBannerStatus={setAddbannerStatus} />
+      ) : null}
+
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-2xl sm:text-3xl">Баннер удирдах</p>
@@ -24,7 +31,10 @@ const Banner = () => {
               </p>
             </div>
             <div className="flex items-center justify-end mt-4 gap-2">
-              <button className="text-white inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  ">
+              <button
+                onClick={() => setAddbannerStatus(true)}
+                className="text-white inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  "
+              >
                 <Icon icon="gravity-ui:copy-picture" width="24" color="white" />
                 Баннер нэмэх
               </button>

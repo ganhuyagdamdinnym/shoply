@@ -37,14 +37,6 @@ const Design = () => {
               </button>
             </div>
           </div>
-          <div className="p-4 flex flex-col bg-white border border-[#e7e3e4] rounded-xl">
-            <div className="text-lg font-semibold font-gilroy flex items-center gap-2">
-              Үндсэн текст фонт
-            </div>
-            <p className="text-xs text-[#71717b] font-medium">
-              Таны дэлгүүрийн бүх төрлийн гарчиг дээр энэхүү фонт нь харагдана.
-            </p>
-          </div>
         </div>
       </div>
     </div>

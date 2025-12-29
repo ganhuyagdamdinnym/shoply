@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 
 const AboutUs = () => {
   return (
-    <div className="px-4 pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 h-screen bg-[#f5f4f4] mx-auto w-full">
+    <div className="px-4 pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 h-screen bg-[#f5f4f4] mx-auto w-full">
       <div className="flex flex-col items-center justify-center p-4">
         {/* Title */}
         <div className="flex flex-col gap-1 items-center text-center">

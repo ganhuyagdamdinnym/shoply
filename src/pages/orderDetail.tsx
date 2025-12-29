@@ -1,6 +1,30 @@
 import { Icon } from "@iconify/react";
-
+import { useParams } from "react-router-dom";
+const orders: any = [
+  {
+    orderId: "12345",
+    orderNumber: "SH0423",
+    status: "цуцлагдсан",
+    price: 10000,
+    user: "Daimaa",
+    userPhoneNumber: "86321240",
+    orderType: "хүргэлтээр",
+    type: "transfort",
+    orderDate: "2025.12.12",
+  },
+  {
+    orderId: "1234567",
+    orderNumber: "SH2007",
+    status: "амжилттай",
+    price: 10000,
+    user: "Daimaa",
+    orderType: "delivery",
+    type: "transfort",
+    orderDate: "2025.12.12",
+  },
+];
 const OrderDetails = () => {
+  const { id } = useParams();
   return (
     <main className="px-4 pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div>

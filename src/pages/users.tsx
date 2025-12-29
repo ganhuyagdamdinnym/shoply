@@ -1,23 +1,8 @@
 import { Icon } from "@iconify/react";
 import "../App.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-type OptionType = "хэлбэр" | "төрөл" | "салбар" | "төлөв";
-function Order() {
-  const navigate = useNavigate();
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  const options: Record<OptionType, string[]> = {
-    хэлбэр: ["Бүх хэлбэр", "Онлайн", "Оффлайн"],
-    төрөл: ["Бүх төрөл", "Сургалт", "Ажлын байр", "Туршлага"],
-    салбар: ["Бүх салбар", "IT", "Боловсрол", "Эрүүл мэнд"],
-    төлөв: ["Бүх төлөв", "Идэвхтэй", "Хаагдсан"],
-  };
-
-  const handleToggle = (type: string) => {
-    setOpenDropdown(openDropdown === type ? null : type);
-  };
+function Users() {
   const orders: any = [
     {
       orderId: "12345",
@@ -45,23 +30,11 @@ function Order() {
     <div className="pt-4 pb-[80px] md:mt-0 md:px-2 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
-          <p className="font-semibold text-2xl sm:text-3xl">Захиалга</p>
+          <p className="font-semibold text-2xl sm:text-3xl">Хэрэглэгч</p>
           <p className="text-sm text-[#71717b]">
-            Бүх захиалгын дэлгэрэнгүй мэдээлэл
+            Бүх хэрэглэгчдийн дэлгэрэнгүй мэдээлэл
           </p>
         </div>
-        <Link to="/order/create">
-          <button
-            className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-44"
-          >
-            <Icon
-              icon="material-symbols-light:border-all-outline-rounded"
-              width="24"
-            />
-            <p>Захиалга үүсгэх</p>
-          </button>
-        </Link>
       </div>
       <div>
         <div className="w-full flex items-center justify-between mt-4 min-w-200">
@@ -72,48 +45,9 @@ function Order() {
 
             <input
               type="text"
-              placeholder="Захиа. #, нэр, имэйл, утасаар хайх..."
+              placeholder="Нэр, имэйл, утасаар хайх..."
               className="flex h-10 pl-9 w-full rounded-md py-2 bg-white sm:text-sm border border-[#e7e3e4]  focus:outline-none focus:border-blue-500 focus:border-2"
             />
-          </div>
-          <div className="items-center gap-2 hidden lg:flex">
-            <div className="flex w-full gap-1.5">
-              {(["хэлбэр", "төрөл", "салбар", "төлөв"] as OptionType[]).map(
-                (type) => (
-                  <div key={type} className="relative">
-                    <button
-                      onClick={() => handleToggle(type)}
-                      className="flex justify-center bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg w-30"
-                    >
-                      <span className="text-[14px]">{options[type][0]}</span>
-                      <Icon
-                        icon="oui:arrow-down"
-                        width="16"
-                        color="#888485"
-                        className="mt-1"
-                      />
-                    </button>
-
-                    {openDropdown === type && (
-                      <ul className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-                        {options[type].map((option) => (
-                          <li
-                            key={option}
-                            onClick={() => {
-                              console.log(type, option);
-                              setOpenDropdown(null);
-                            }}
-                            className="px-3 py-2 hover:bg-gray-100 cursor-pointer text-[14px]"
-                          >
-                            {option}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                )
-              )}
-            </div>
           </div>
         </div>
         {orders == "" ? (
@@ -146,7 +80,7 @@ function Order() {
                       />
                     </th>
                     <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      Захиалгын #
+                      Хэрэглэгчийн #
                     </th>
                     <th className="py-4 px-2 text-left font-semibold text-gray-900">
                       Төлөв
@@ -158,7 +92,7 @@ function Order() {
                       </div>
                     </th>
                     <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      Хэрэглэгч
+                      Нэр
                     </th>
                     <th className="py-4 px-2 text-left font-semibold text-gray-900">
                       Захиалгын төрөл
@@ -178,9 +112,8 @@ function Order() {
                 <tbody className="bg-[#f9f9f9]">
                   {orders?.map((order: any, index: any) => (
                     <tr
-                      onClick={() => navigate(`/order/${order.orderId}`)}
                       key={index}
-                      className="border-b border-[#e7e3e4] hover:bg-white transition-colors group cursor-pointer"
+                      className="border-b border-[#e7e3e4] hover:bg-white transition-colors group"
                     >
                       <td className="p-4">
                         <input
@@ -261,4 +194,4 @@ function Order() {
   );
 }
 
-export default Order;
+export default Users;
