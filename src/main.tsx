@@ -32,6 +32,7 @@ import Login from "./pages/login.tsx";
 import Users from "./pages/users.tsx";
 import BrandEdit from "./pages/branEdit.tsx";
 import OrderEdit from "./pages/orderEdit.tsx";
+import AddBranch from "./pages/addBranch.tsx";
 
 function AppContent() {
   const [open, setOpen] = useState(false);
@@ -107,6 +108,7 @@ function AppContent() {
             <Route path="/order/:id/edit" element={<OrderEdit />} />
             <Route path="/productDetails" element={<ProductDetails />} />
             <Route path="/user" element={<Users />} />
+            <Route path="/branch/create" element={<AddBranch />} />
             <Route path="/brand/:id" element={<BrandEdit />} />
           </Routes>
         </main>
