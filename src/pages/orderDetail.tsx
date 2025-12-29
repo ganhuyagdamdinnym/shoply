@@ -26,7 +26,7 @@ const orders: any = [
 const OrderDetails = () => {
   const { id } = useParams();
   return (
-    <main className="px-4 pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+    <main className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div>
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-x-2 gap-y-4">
           <div className="flex flex-col">
@@ -82,7 +82,7 @@ const OrderDetails = () => {
                 </div>
               </div>
               <div className="flex justify-end mt-4">
-                <button className="inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium disabled:opacity-50 bg-[#f5f5f5] text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2  ">
+                <button className="inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium disabled:opacity-50 bg-[#f5f5f5] text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2  ">
                   <Icon icon="mage:box-3d-minus" width={20} />
                   Бараа буцаах
                 </button>
@@ -120,21 +120,15 @@ const OrderDetails = () => {
                 <dl className="space-y-3 border-t border-[#e7e3e4] pt-4 text-sm">
                   <div className="flex justify-between px-2">
                     <dt className="flex font-medium">Үнийн дүн</dt>
-                    <dt className="font-medium text-[#71717b] font-medium">
-                      289,000₮
-                    </dt>
+                    <dt className="font-medium text-[#71717b] ">289,000₮</dt>
                   </div>
                   <div className="flex justify-between px-2">
                     <dt className="flex font-medium">Хямдрал</dt>
-                    <dt className="font-medium text-[#71717b] font-medium">
-                      289,000₮
-                    </dt>
+                    <dt className="font-medium text-[#71717b]">289,000₮</dt>
                   </div>{" "}
                   <div className="flex justify-between px-2">
                     <dt className="flex font-medium">Хүргэлт</dt>
-                    <dt className="font-medium text-[#71717b] font-medium">
-                      289,000₮
-                    </dt>
+                    <dt className="font-medium text-[#71717b] ">289,000₮</dt>
                   </div>{" "}
                   <div className="flex justify-between px-2">
                     <dt className="font-semibold text-base font-gilroy">

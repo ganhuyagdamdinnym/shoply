@@ -12,7 +12,7 @@ export const LastOrders = () => {
             Хамгийн сүүлийн 6-н захиалга
           </h1>
         </div>
-        <div className="flex justify-between items-center p-2 bg-white rounded-lg w-full gap-1.5 sm:!max-w-[200px] border border-[#f5f4f4]">
+        <div className="flex justify-between items-center p-2 bg-white rounded-lg w-full gap-1.5 sm:max-w-50! border border-[#f5f4f4]">
           <p>Хүлээгдэж буй</p>
           <Icon icon="mdi:arrow-bottom" width="20" />
         </div>
@@ -29,7 +29,7 @@ export const LastOrders = () => {
             Хүлээгдэж буй захиалга байхгүй байна
           </h1>
         </div>
-        <div className="inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium  transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-200  hover:bg-secondary/80 h-10 px-4 py-2 w-full! mt-4">
+        <div className="inline-flex items-center  text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium  transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-200  hover:bg-secondary/80 h-10 px-4 py-2 w-full! mt-4">
           <Icon icon="fluent-mdl2:product" width="24" />
           Бүх захиалгууд
         </div>

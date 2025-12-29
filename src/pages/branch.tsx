@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 const Branch = () => {
   return (
-    <div className="px-4 pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+    <div className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div>
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-x-2 gap-y-4">
           <div className="flex flex-col gap-1">
@@ -15,7 +15,7 @@ const Branch = () => {
           <div className="flex items-center gap-2">
             <button
               className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
+                   bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
             >
               <Icon icon="gridicons:add-outline" width={20} />
               <p>Салбар нэмэх</p>
@@ -36,7 +36,7 @@ const Branch = () => {
                 </p>
                 <button
                   className="mt-2 flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
+                   bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
                 >
                   <Icon icon="gridicons:add-outline" width={20} />
                   <p>Салбар нэмэх</p>

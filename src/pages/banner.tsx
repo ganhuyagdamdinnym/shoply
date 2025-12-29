@@ -4,7 +4,7 @@ import { useState } from "react";
 const Banner = () => {
   const [addBannerStatus, setAddbannerStatus] = useState<boolean>(false);
   return (
-    <div className="px-4 pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+    <div className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       {addBannerStatus == true ? (
         <AddBanner setAddBannerStatus={setAddbannerStatus} />
       ) : null}
@@ -33,7 +33,7 @@ const Banner = () => {
             <div className="flex items-center justify-end mt-4 gap-2">
               <button
                 onClick={() => setAddbannerStatus(true)}
-                className="text-white inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gradient-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  "
+                className="text-white inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-linear-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  "
               >
                 <Icon icon="gravity-ui:copy-picture" width="24" color="white" />
                 Баннер нэмэх
@@ -44,12 +44,12 @@ const Banner = () => {
             <div className="text-lg font-semibold font-gilroy flex items-center gap-2">
               Толгой баннер текст
             </div>
-            <div className="h-[200px] w-full bg-[#f5f4f4] border border-[#f5f4f4] rounded-xl flex flex-col gap-2 items-center justify-center mt-4 px-2">
+            <div className="h-50 w-full bg-[#f5f4f4] border border-[#f5f4f4] rounded-xl flex flex-col gap-2 items-center justify-center mt-4 px-2">
               <Icon icon="lucide:lock" width="40" color="#71717b" />
               <div className="text-sm font-medium text-[#71717b] text-center">
                 Багцаа ахиулаад дэлгүүрийн толгой баннер тохируулах боломжтой
               </div>
-              <div className="inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent text-accent-foreground h-10 px-4 py-2  ">
+              <div className="inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent text-accent-foreground h-10 px-4 py-2  ">
                 <Icon icon="lucide:crown" width={20} />
                 Багцаа ахиулах
               </div>

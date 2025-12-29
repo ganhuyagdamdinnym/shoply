@@ -31,6 +31,7 @@ import ProductDetails from "./pages/productdetails.tsx";
 import Login from "./pages/login.tsx";
 import Users from "./pages/users.tsx";
 import BrandEdit from "./pages/branEdit.tsx";
+import OrderEdit from "./pages/orderEdit.tsx";
 
 function AppContent() {
   const [open, setOpen] = useState(false);
@@ -103,8 +104,9 @@ function AppContent() {
             <Route path="/account" element={<Account />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/order/:id" element={<OrderDetails />} />
+            <Route path="/order/:id/edit" element={<OrderEdit />} />
             <Route path="/productDetails" element={<ProductDetails />} />
-            <Route path="/users" element={<Users />} />
+            <Route path="/user" element={<Users />} />
             <Route path="/brand/:id" element={<BrandEdit />} />
           </Routes>
         </main>

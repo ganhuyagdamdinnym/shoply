@@ -141,7 +141,7 @@ export const AddBanner = (props: Props) => {
         </div>
 
         <div className="flex flex-col gap-3">
-          <button className="w-full h-12 text-white font-semibold rounded-xl bg-gradient-to-r from-blue-500 to-indigo-400">
+          <button className="w-full h-12 text-white font-semibold rounded-xl bg-linear-to-r from-blue-500 to-indigo-400">
             Баннер нэмэх
           </button>
           <button

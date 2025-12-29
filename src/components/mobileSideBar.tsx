@@ -90,7 +90,7 @@ export const MobileSideBar = (props: Props) => {
           )}
         </NavLink>
       ))}
-      <div className="w-full h-[1px] mt-3 bg-[#e7e3e4]" />
+      <div className="w-full h-px mt-3 bg-[#e7e3e4]" />
 
       {/* SYSTEM HEADER */}
       <button className="text-xs font-medium flex h-8 text-[#0b0809]/70 px-2 mt-3">

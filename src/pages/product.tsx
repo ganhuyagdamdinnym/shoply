@@ -23,7 +23,7 @@ function Product() {
     },
   ];
   return (
-    <div className="px-4 pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+    <div className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-2xl sm:text-3xl">
@@ -36,7 +36,7 @@ function Product() {
         <Link to="/product/create">
           <button
             className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
+                   bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
           >
             <Icon icon="system-uicons:box-add" width="24" />
             <p>Бараа нэмэх</p>
@@ -45,7 +45,7 @@ function Product() {
       </div>
       <div className="w-full items-center justify-between mt-4">
         <div className="relative w-[320px] h-10">
-          <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
+          <div className="text-[#71717b] absolute left-px top-px p-2.5">
             <Icon icon="material-symbols-light:search-rounded" width="20" />
           </div>
           <input

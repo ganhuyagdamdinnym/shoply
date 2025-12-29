@@ -3,10 +3,13 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "sonner";
+
 type OptionType = "хэлбэр" | "төрөл" | "салбар" | "төлөв";
 function Order() {
   const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const options: Record<OptionType, string[]> = {
     хэлбэр: ["Бүх хэлбэр", "Онлайн", "Оффлайн"],
@@ -14,9 +17,32 @@ function Order() {
     салбар: ["Бүх салбар", "IT", "Боловсрол", "Эрүүл мэнд"],
     төлөв: ["Бүх төлөв", "Идэвхтэй", "Хаагдсан"],
   };
-
+  const handleAction = (type: string) => {
+    if (type === "success") {
+      toast.success("Захиалга амжилттай хүргэгдлээ", {
+        description: "Хэрэглэгчид мэдэгдэл очсон.",
+      });
+    } else {
+      toast.error("Алдал гарлаа", {
+        description: "Дахин оролдоно уу.",
+      });
+    }
+  };
   const handleToggle = (type: string) => {
     setOpenDropdown(openDropdown === type ? null : type);
+  };
+  const handleCheck = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      const allIds = orders.map((o: any) => o.orderId);
+      setSelectedIds(allIds);
+    } else {
+      setSelectedIds([]);
+    }
   };
   const orders: any = [
     {
@@ -42,9 +68,10 @@ function Order() {
     },
   ];
   return (
-    <div className="pt-4 pb-[80px] md:mt-0 md:px-2 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+    <div className="pt-4 pb-20 md:mt-0 md:px-2 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
+          <Toaster position="top-right" richColors />
           <p className="font-semibold text-2xl sm:text-3xl">Захиалга</p>
           <p className="text-sm text-[#71717b]">
             Бүх захиалгын дэлгэрэнгүй мэдээлэл
@@ -53,7 +80,7 @@ function Order() {
         <Link to="/order/create">
           <button
             className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-44"
+                   bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-44"
           >
             <Icon
               icon="material-symbols-light:border-all-outline-rounded"
@@ -65,8 +92,8 @@ function Order() {
       </div>
       <div>
         <div className="w-full flex items-center justify-between mt-4 min-w-200">
-          <div className="relative w-[320px] h-[40px]">
-            <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
+          <div className="relative w-[320px] h-10">
+            <div className="text-[#71717b] absolute left-px top-px p-2.5">
               <Icon icon="material-symbols-light:search-rounded" width="20" />
             </div>
 
@@ -141,6 +168,12 @@ function Order() {
                   <tr className="bg-white border-b border-[#e7e3e4]">
                     <th className="p-4 w-10">
                       <input
+                        onChange={handleSelectAll}
+                        checked={
+                          selectedIds.length === orders.length &&
+                          orders.length > 0
+                        }
+                        onClick={(e) => e.stopPropagation()}
                         type="checkbox"
                         className="rounded border-gray-300"
                       />
@@ -182,10 +215,13 @@ function Order() {
                       key={index}
                       className="border-b border-[#e7e3e4] hover:bg-white transition-colors group cursor-pointer"
                     >
-                      <td className="p-4">
+                      <td onClick={(e) => e.stopPropagation()} className="p-4">
                         <input
                           type="checkbox"
                           className="rounded border-gray-300"
+                          onClick={(e) => e.stopPropagation()}
+                          onChange={() => handleCheck(order.orderId)}
+                          checked={selectedIds.includes(order.orderId)}
                         />
                       </td>
                       <td className="px-2 py-4 font-medium text-gray-500">
@@ -243,10 +279,13 @@ function Order() {
                             icon="lucide:eye"
                             className="w-5 h-5 cursor-pointer hover:text-gray-900"
                           />
-                          <Icon
-                            icon="tabler:dots"
-                            className="w-6 h-6 cursor-pointer hover:text-gray-900"
-                          />
+                          <div onClick={(e) => e.stopPropagation()}>
+                            <Icon
+                              onClick={() => handleAction("success")}
+                              icon="tabler:dots"
+                              className="w-6 h-6 cursor-pointer hover:text-gray-900"
+                            />
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -256,6 +295,48 @@ function Order() {
             </div>
           </div>
         )}
+        {selectedIds.length > 0 ? (
+          <div className="animate-slide-up fixed bottom-16 md:bottom-2 left-0 right-0 w-full p-4 z-50 flex items-center justify-center">
+            <div className="bg-muted shadow-lg rounded-2xl px-3 py-2 w-fit flex items-center justify-between xl:gap-2 gap-1">
+              <button className="flex gap-2 items-center justify-center cursor-pointer text-sm rounded-lg font-medium h-9 px-3 text-[#1b1718]">
+                <Icon icon="garden:x-stroke-12" width={20} color="[#1b1718]" />
+                <span className="hidden xl:inline-flex">Болих</span>
+              </button>
+              <button className="flex gap-2 items-center justify-center cursor-pointer text-sm rounded-lg font-medium h-9 px-3 text-[#71717b]">
+                <Icon
+                  icon="solar:letter-outline"
+                  width={22}
+                  color="[#71717b]"
+                />
+                <span className="hidden xl:inline-flex">Харсан</span>
+              </button>
+              <button className="flex gap-2 items-center justify-center cursor-pointer text-sm rounded-lg font-medium h-9 px-3 text-[#b91c1c]">
+                <Icon icon="cil:x-circle" width={20} color="[#1b1718]" />
+                <span className="hidden xl:inline-flex">Цуцлах</span>
+              </button>
+              <button className="flex gap-2 items-center justify-center cursor-pointer text-sm rounded-lg font-medium h-9 px-3 text-[#d97706]">
+                <Icon
+                  icon="majesticons:clock-line"
+                  width={22}
+                  color="[#1b1718]"
+                />
+                <span className="hidden xl:inline-flex">Хүлээгдэж буй</span>
+              </button>
+              <button className="flex gap-2 items-center justify-center cursor-pointer text-sm rounded-lg font-medium h-9 px-3 text-[#16a34a]">
+                <Icon
+                  icon="lets-icons:money-light"
+                  width={24}
+                  color="[#1b1718]"
+                />
+                <span className="hidden xl:inline-flex">Төлөгдсөн</span>
+              </button>
+              <button className="flex gap-1 items-center justify-center cursor-pointer text-sm rounded-lg font-medium h-9 px-3 text-[#3b82f6]">
+                <Icon icon="gg:check-o" width={20} color="[#1b1718]" />
+                <span className="hidden xl:inline-flex">Хүргэгдсэн</span>
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

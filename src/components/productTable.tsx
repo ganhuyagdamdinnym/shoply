@@ -38,7 +38,7 @@ export const ProductTable = (props: Props) => {
       </td>
       <td className="px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+          <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 shrink-0">
             <img
               src={image}
               alt={name}
@@ -109,7 +109,7 @@ export const ProductTable = (props: Props) => {
               text="Ноороглох"
               onClick={() => setShowMenu(false)}
             />
-            <div className="h-[1px] bg-gray-100 my-1" />
+            <div className="h-px bg-gray-100 my-1" />
             <MenuButton
               icon="mi:delete"
               text="Устгах"

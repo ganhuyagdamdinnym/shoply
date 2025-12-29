@@ -38,8 +38,8 @@ function Users() {
       </div>
       <div>
         <div className="w-full flex items-center justify-between mt-4 min-w-200">
-          <div className="relative w-[320px] h-[40px]">
-            <div className="text-[#71717b] absolute left-[1px] top-[1px] p-2.5">
+          <div className="relative w-[320px] h-10">
+            <div className="text-[#71717b] absolute left-px top-px p-2.5">
               <Icon icon="material-symbols-light:search-rounded" width="20" />
             </div>
 

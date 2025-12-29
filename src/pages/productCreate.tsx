@@ -15,7 +15,7 @@ function CreateProduct() {
         <Link to="/product/create">
           <button
             className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
+                   bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
           >
             <Icon icon="system-uicons:box-add" width="24" />
             <p>Бараа нэмэх</p>
@@ -23,7 +23,7 @@ function CreateProduct() {
         </Link>
       </div>
       <div className="mt-4">
-        <div className="grid grid-cols-12 gap-4 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-12 gap-4 max-w-350 mx-auto">
           <div className="col-span-full xl:col-span-8 flex flex-col gap-4">
             <div className="bg-white border border-[#e7e3e4] rounded-xl p-4">
               <div className="grid w-full items-center gap-1.5 max-w-none!">
