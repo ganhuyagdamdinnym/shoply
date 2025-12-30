@@ -1,25 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useState, useEffect } from "react";
 
 type BrandType = {
+  id: string;
   image: string;
   name: string;
   description: string;
 };
 const data: BrandType[] = [
   {
+    id: "1234",
     name: "test",
     image: "jordan.png",
     description: "mmewegtghggsdafgyu",
   },
   {
+    id: "jhsayd",
     name: "test2",
     image: "jordan.png",
     description: "mmewegtghggsdafgyu",
   },
 ];
 const Brand = () => {
+  const navigate = useNavigate();
   const [brands, setBrands] = useState<BrandType[] | null>(null);
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const Brand = () => {
         <Link to="/brand/create">
           <button
             className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-44"
+                   bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-44"
           >
             <Icon icon="gridicons:add-outline" width={24} />
             <p>Брэнд нэмэх</p>
@@ -60,7 +64,7 @@ const Brand = () => {
                 <Link to="/brand/create">
                   <button
                     className="mt-2 flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm justify-center
-                   bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
+                   bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-40"
                   >
                     <Icon icon="gridicons:add-outline" width={20} />
                     <p>Брэнд нэмэх</p>
@@ -88,7 +92,10 @@ const Brand = () => {
                 <p className="text-xs font-medium text-[#71717b] mt-2 text-center">
                   {brand.description}
                 </p>
-                <button className="bg-[#1b1718]/10 h-8 mt-4 px-4 py-1 inline-flex gap-2 items-center cursor-pointer text-sm justify-center rounded-md">
+                <button
+                  onClick={() => navigate(`/brand/${brand.id}`)}
+                  className="bg-[#1b1718]/10 h-8 mt-4 px-4 py-1 inline-flex gap-2 items-center cursor-pointer text-sm justify-center rounded-md"
+                >
                   <Icon icon="ri:settings-line" />
                   Засварлах
                 </button>

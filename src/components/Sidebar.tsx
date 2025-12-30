@@ -13,6 +13,7 @@ const primeDashboard = [
   { name: "/product", icon: "fluent-mdl2:product", text: "Бүтээгдэхүүн" },
   { name: "/category", icon: "quill:sort", text: "Ангилал" },
   { name: "/brand", icon: "tabler:chart-circles", text: "Брэнд" },
+  { name: "/indicator", icon: "gg:size", text: "Үзүүлэлтүүд" },
   { name: "/user", icon: "tabler:users", text: "Хэрэглэгч" },
 ];
 
@@ -58,7 +59,7 @@ export const SideBar = () => {
   }, []);
   return (
     <div
-      className="w-[250px] h-[calc(100vh-16px)] bg-white px-4
+      className="w-62.5 h-[calc(100vh-16px)] bg-white px-4
       border rounded-xl border-[#EAE9ED]
       shadow-xl
       fixed top-2 left-2 hidden md:block "
@@ -98,7 +99,7 @@ export const SideBar = () => {
         </div>
 
         {/* DIVIDER */}
-        <div className="w-full h-[1px] mt-3 bg-[#e7e3e4]" />
+        <div className="w-full h-px mt-3 bg-[#e7e3e4]" />
 
         {/* SYSTEM HEADER */}
         <button className="text-xs font-medium flex h-8 text-[#0b0809]/70 px-2 mt-3">
@@ -131,21 +132,33 @@ export const SideBar = () => {
         </div>
       </div>
       {isClick && (
+        <div className="fixed inset-0 z-10" onClick={() => setIsClick(false)} />
+      )}
+      {isClick && (
         <div
-          ref={profileRef}
           className="absolute bottom-16 left-3 right-3
           bg-white shadow-2xl border border-gray-300
-             rounded-xl flex flex-col px-3 py-2"
+          rounded-xl flex flex-col px-3 py-2 z-20"
         >
-          <Link to="/account">
-            <div className="flex  items-center gap-2 w-full hover:bg-gray-100 py-1 rounded-sm px-1">
+          <Link
+            to="/account"
+            onClick={() => {
+              setIsClick(false);
+            }}
+          >
+            <div className="flex items-center gap-2 w-full hover:bg-gray-100 py-1 rounded-sm px-1">
               <Icon icon="solar:user-linear" width={16} />
               <p className="text-black text-[14px]">Миний бүртгэл</p>
             </div>
           </Link>
-          <div className="flex  items-center gap-2 w-full hover:bg-gray-100 py-1 rounded-sm px-1 text-red-500">
+          <div
+            className="flex items-center gap-2 w-full hover:bg-gray-100 py-1 rounded-sm px-1 text-red-500 cursor-pointer"
+            onClick={() => {
+              /* Logout logic */ setIsClick(false);
+            }}
+          >
             <Icon icon="mingcute:exit-line" width={16} />
-            <p className=" text-[14px]">Гарах</p>
+            <p className="text-[14px]">Гарах</p>
           </div>
         </div>
       )}

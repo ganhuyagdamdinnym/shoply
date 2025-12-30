@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
 const orders: any = [
   {
     orderId: "12345",
@@ -24,6 +25,7 @@ const orders: any = [
   },
 ];
 const OrderDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   return (
     <main className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
@@ -41,7 +43,10 @@ const OrderDetails = () => {
             </p>
           </div>
           <div className="flex gap-2 items-center">
-            <div className="bg-white h-10 px-4 py-2 border border-[#e7e3e4] inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium">
+            <div
+              onClick={() => navigate(`/order/${id}/edit`)}
+              className="bg-white h-10 px-4 py-2 border border-[#e7e3e4] inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium"
+            >
               <Icon icon="ri:settings-line" />
               Засах
             </div>
@@ -200,12 +205,12 @@ const OrderDetails = () => {
                   {/* Textarea */}
                   <textarea
                     placeholder="Энд тэмдэглэлээ бичнэ үү..."
-                    className="w-full min-h-[160px] mt-3 resize-none bg-[#f5f4f4] rounded-lg p-3 text-sm outline-none placeholder:text-[#a1a1aa]"
+                    className="w-full min-h-40 mt-3 resize-none bg-[#f5f4f4] rounded-lg p-3 text-sm outline-none placeholder:text-[#a1a1aa]"
                   />
 
                   {/* Save Button */}
                   <div className="flex justify-end mt-4">
-                    <button className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-500 to-indigo-400 px-4 py-2 text-white text-sm font-medium">
+                    <button className="inline-flex items-center gap-2 rounded-md bg-linear-to-r from-blue-500 to-indigo-400 px-4 py-2 text-white text-sm font-medium">
                       <Icon icon="uil:save" width="20" />
                       Хадгалах
                     </button>

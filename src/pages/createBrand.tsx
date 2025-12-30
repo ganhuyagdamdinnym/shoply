@@ -14,7 +14,7 @@ const CreateBrand = () => {
   };
 
   return (
-    <main className="px-4 pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-full md:max-w-8xl mx-auto w-full">
+    <main className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-full md:max-w-8xl mx-auto w-full">
       <div className="max-w-md w-full mx-auto py-6 px-8 bg-white rounded-2xl border border-[#e7e3e4]">
         <h1 className="text-center font-gilroy text-xl font-semibold">
           Шинээр брэнд нэмэх
@@ -81,8 +81,8 @@ const CreateBrand = () => {
           {/* ===== Save button ===== */}
           <div className="flex justify-end gap-2 mt-8">
             <button
-              className="flex items-center gap-2 px-4 py-2 rounded-md font-medium text-sm
-              bg-gradient-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10 w-44"
+              className="flex items-center gap-2 px-4 rounded-lg font-medium text-sm
+              bg-linear-to-r from-blue-500 to-indigo-400 text-white cursor-pointer h-10"
             >
               <Icon icon="lucide-lab:save" width="22" />
               <p>Хадгалах</p>

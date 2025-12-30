@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   name: string;
@@ -11,11 +12,15 @@ type Props = {
 };
 
 export const ProductTable = (props: Props) => {
+  const navigate = useNavigate();
   const { name, price, status, uldegdel, category, image } = props;
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // Цэснээс гадна дарахад хаах функц
+  const handleSomeLogic = (e: any) => {
+    e.stopPropagation();
+    setShowMenu(true);
+  };
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -32,8 +37,11 @@ export const ProductTable = (props: Props) => {
   }, [showMenu]);
 
   return (
-    <tr className="border-b border-[#e7e3e4] hover:bg-gray-50 transition-colors">
-      <td className="px-4 py-3">
+    <tr
+      onClick={() => navigate(`/product/${name}`)}
+      className="border-b border-[#e7e3e4] hover:bg-gray-50 transition-colors"
+    >
+      <td onClick={(e) => e.stopPropagation()} className="px-4 py-3">
         <input type="checkbox" className="rounded border-gray-300" />
       </td>
       <td className="px-4 py-3">
@@ -77,7 +85,7 @@ export const ProductTable = (props: Props) => {
             <Icon icon="lucide:eye" width="18" className="text-gray-500" />
           </button>
           <button
-            onClick={() => setShowMenu(!showMenu)}
+            onClick={(e) => handleSomeLogic(e)}
             className="p-1 hover:bg-gray-100 rounded-md transition-colors"
           >
             <Icon icon="tabler:dots" width="22" className="text-gray-600" />

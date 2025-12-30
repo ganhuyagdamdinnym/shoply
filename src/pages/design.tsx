@@ -27,11 +27,11 @@ const Design = () => {
               </div>
             </div>
             <div className="flex items-center justify-end mt-4 gap-2">
-              <button className="bg-[#f5f4f4] text-[#1b1718] inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2  ">
+              <button className="bg-[#f5f4f4] text-[#1b1718] inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-xl font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2  ">
                 <Icon icon="ic:outline-photo" width="24" color="#3B3838" /> Лого
                 сонгох
               </button>
-              <button className="text-white inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-linear-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  ">
+              <button className="text-white inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-xl font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-linear-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  ">
                 <Icon icon="uil:save" width="24" color="white" />
                 Лого хадгалах
               </button>

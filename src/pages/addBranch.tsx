@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Clock, CalendarX } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { Clock, CalendarX, X } from "lucide-react";
+import { Icon } from "@iconify/react";
 
-// Хуваарийн өгөгдлийн бүтцийг тодорхойлно
 interface ScheduleDay {
   day: string;
   open: string;
@@ -10,18 +10,32 @@ interface ScheduleDay {
 }
 
 const AddBranch: React.FC = () => {
-  // TypeScript-д state-ийн төрлийг зааж өгнө
   const [schedule, setSchedule] = useState<ScheduleDay[]>([
-    { day: "Даваа", open: "09:20 AM", close: "06:00 PM", active: true },
+    { day: "Даваа", open: "09:00 AM", close: "06:00 PM", active: true },
     { day: "Мягмар", open: "09:00 AM", close: "06:00 PM", active: true },
     { day: "Лхагва", open: "09:00 AM", close: "06:00 PM", active: true },
     { day: "Пүрэв", open: "09:00 AM", close: "06:00 PM", active: true },
     { day: "Баасан", open: "09:00 AM", close: "06:00 PM", active: true },
     { day: "Бямба", open: "09:00 AM", close: "06:00 PM", active: true },
-    { day: "Ням", open: "09:00 AM", close: "06:00 PM", active: true },
+    { day: "Ням", open: "09:00 AM", close: "06:00 PM", active: false },
   ]);
 
-  // Цаг өөрчлөх функц
+  const [isActiveBranch, setIsActiveBranch] = useState(true);
+  const [image, setImage] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Зураг сонгох функц
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleTimeChange = (
     index: number,
     field: "open" | "close",
@@ -32,7 +46,6 @@ const AddBranch: React.FC = () => {
     setSchedule(updatedSchedule);
   };
 
-  // Өдрийг идэвхжүүлэх/идэвхгүй болгох функц
   const toggleActive = (index: number) => {
     const updatedSchedule = [...schedule];
     updatedSchedule[index].active = !updatedSchedule[index].active;
@@ -59,7 +72,7 @@ const AddBranch: React.FC = () => {
             />
           </div>
 
-          {/* Салбарын байршил */}
+          {/* Байршил */}
           <div className="grid w-full gap-2">
             <label className="text-sm font-medium">
               Салбарын байршил <span className="text-blue-500">*</span>
@@ -70,12 +83,11 @@ const AddBranch: React.FC = () => {
             />
           </div>
 
-          {/* Ажиллах цагийн хуваарийн хэсэг */}
+          {/* Цагийн хуваарь */}
           <div className="flex flex-col gap-4 mt-2">
             <label className="text-sm font-medium">
               Ажиллах цагийн хуваарь
             </label>
-
             <div className="space-y-3">
               {schedule.map((item, index) => (
                 <div
@@ -87,9 +99,7 @@ const AddBranch: React.FC = () => {
                   <span className="text-sm font-medium text-gray-500 w-16">
                     {item.day}
                   </span>
-
                   <div className="flex items-center gap-2 flex-1">
-                    {/* Нээх цаг */}
                     <div className="relative flex-1">
                       <input
                         type="text"
@@ -102,10 +112,7 @@ const AddBranch: React.FC = () => {
                       />
                       <Clock className="absolute right-2.5 top-3 w-4 h-4 text-gray-400" />
                     </div>
-
                     <span className="text-gray-400">-</span>
-
-                    {/* Хаах цаг */}
                     <div className="relative flex-1">
                       <input
                         type="text"
@@ -118,8 +125,6 @@ const AddBranch: React.FC = () => {
                       />
                       <Clock className="absolute right-2.5 top-3 w-4 h-4 text-gray-400" />
                     </div>
-
-                    {/* Устгах/Идэвхгүй болгох товч */}
                     <button
                       type="button"
                       onClick={() => toggleActive(index)}
@@ -137,9 +142,80 @@ const AddBranch: React.FC = () => {
             </div>
           </div>
 
+          {/* Зураг оруулах хэсэг */}
           <div className="mt-2">
             <label className="text-sm font-medium">Салбарын үндсэн зураг</label>
-            <div className="aspect-[16/9] w-full bg-[#f5f4f4] border border-[#f5f4f4] rounded-xl flex mt-2 items-center justify-center cursor-pointer"></div>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+            />
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              className="relative aspect-video w-full bg-[#f5f4f4] border-2 border-dashed border-[#e7e3e4] rounded-xl flex mt-2 items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors overflow-hidden"
+            >
+              {image ? (
+                <>
+                  <img
+                    src={image}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setImage(null);
+                    }}
+                    className="absolute top-2 right-2 p-1 bg-white/80 rounded-full hover:bg-white shadow-sm"
+                  >
+                    <X className="w-4 h-4 text-gray-600" />
+                  </button>
+                </>
+              ) : (
+                <div className="flex flex-col items-center">
+                  <Icon icon="ic:outline-photo" width="40" color="#3B3838" />
+                  <span className="text-xs text-gray-400 mt-1">
+                    Зураг сонгох
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Идэвхтэй эсэх toggle */}
+          <div className="flex justify-between items-center gap-4 bg-white border border-[#e7e3e4] px-4 py-3 rounded-lg">
+            <div className="flex flex-col pr-4">
+              <h4 className="font-gilroy font-medium leading-4.5">
+                Идэвхтэй салбар эсэх
+              </h4>
+              <p className="text-xs text-[#71717b] font-medium leading-4 mt-0.5">
+                Захиалга хийгдэх үед хэрэглэгч сонгон очиж авах боломжтой эсэх.
+              </p>
+            </div>
+
+            {/* Toggle Switch */}
+            <button
+              type="button"
+              onClick={() => setIsActiveBranch(!isActiveBranch)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
+                isActiveBranch ? "bg-black" : "bg-gray-200"
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  isActiveBranch ? "translate-x-6" : "translate-x-1"
+                }`}
+              />
+            </button>
+          </div>
+
+          <div className="flex justify-end">
+            <button className="text-white inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-xl font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-linear-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  ">
+              <Icon icon="uil:save" width="24" color="white" />
+              Xадгалах
+            </button>
           </div>
         </div>
       </div>

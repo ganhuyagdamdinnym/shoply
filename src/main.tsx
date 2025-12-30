@@ -7,7 +7,6 @@ import {
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { Icon } from "@iconify/react";
 
 import App from "./App.tsx";
 import Order from "./pages/order.tsx";
@@ -33,6 +32,8 @@ import Users from "./pages/users.tsx";
 import BrandEdit from "./pages/branEdit.tsx";
 import OrderEdit from "./pages/orderEdit.tsx";
 import AddBranch from "./pages/addBranch.tsx";
+import { MobileHeader } from "./components/mobileHeader.tsx";
+import Indicator from "./pages/indicator.tsx";
 
 function AppContent() {
   const [open, setOpen] = useState(false);
@@ -53,21 +54,12 @@ function AppContent() {
     <div className="h-screen overflow-hidden bg-[#f5f4f4]">
       <div className="flex h-full">
         {/* DESKTOP SIDEBAR */}
-        <div className="hidden md:block w-[270px] flex-shrink-0">
+        <div className="hidden md:block w-67.5 shrink-0">
           <SideBar />
         </div>
 
         {/* MOBILE HEADER */}
-        <div className="md:hidden fixed top-0 left-0 w-full h-[56px] z-40 bg-white/50 border-b border-[#e7e3e4] backdrop-blur-lg px-2 flex items-center justify-between">
-          <button
-            onClick={() => setOpen(true)}
-            className="border border-[#e7e3e4] h-10 w-10 rounded-xl flex items-center justify-center"
-          >
-            <Icon icon="quill:hamburger" width={20} />
-          </button>
-          <img src="infitechLogo.png" className="w-30" alt="logo" />
-          <div className="w-10 h-10 rounded-full bg-green-950"></div>
-        </div>
+        <MobileHeader setOpen={setOpen} />
 
         {/* MOBILE OVERLAY */}
         {open && (
@@ -87,7 +79,7 @@ function AppContent() {
         </div>
 
         {/* MAIN CONTENT */}
-        <main className="flex-1 overflow-y-auto pt-[56px] md:pt-0">
+        <main className="flex-1 overflow-y-auto pt-14 md:pt-0">
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/order" element={<Order />} />
@@ -97,6 +89,7 @@ function AppContent() {
             <Route path="/product/create" element={<CreateProduct />} />
             <Route path="/order/create" element={<CreateOrder />} />
             <Route path="/brand/create" element={<CreateBrand />} />
+            <Route path="/indicator" element={<Indicator />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/design" element={<Design />} />
             <Route path="/banner" element={<Banner />} />
@@ -106,7 +99,7 @@ function AppContent() {
             <Route path="/admin" element={<Admin />} />
             <Route path="/order/:id" element={<OrderDetails />} />
             <Route path="/order/:id/edit" element={<OrderEdit />} />
-            <Route path="/productDetails" element={<ProductDetails />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/user" element={<Users />} />
             <Route path="/branch/create" element={<AddBranch />} />
             <Route path="/brand/:id" element={<BrandEdit />} />
