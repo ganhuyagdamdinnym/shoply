@@ -1,6 +1,8 @@
 import { Icon } from "@iconify/react";
+import { useState } from "react";
 
 export const CreatingProductInfo = () => {
+  const [isActive, setIsActive] = useState<boolean>();
   return (
     <div className="mt-3">
       <div className="flex flex-col gap-8">
@@ -19,10 +21,6 @@ export const CreatingProductInfo = () => {
                 <Icon icon="ic:outline-photo" width="24" />
                 Зураг оруулах
               </button>
-            </div>
-            <div className="text-sm text-[#71717b] mt-3 mb-1">эсвэл</div>
-            <div className="inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#f5f4f4] text-[#1b1718] h-10 px-4 py-2  ">
-              Зураг холбоосоор оруулах
             </div>
           </div>
         </div>
@@ -104,8 +102,28 @@ export const CreatingProductInfo = () => {
             </div>
           </div>
         </div>
+        <div className="col-span-full">
+          <div className="flex items-center space-x-3">
+            <button
+              type="button"
+              onClick={() => setIsActive(!isActive)}
+              className={`relative inline-flex h-5 w-10 items-center rounded-full transition-colors focus:outline-none ${
+                isActive ? "bg-black" : "bg-gray-200"
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  isActive ? "translate-x-6" : "translate-x-0"
+                }`}
+              />
+            </button>
+            <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
+              Дэлгэрэнгүй мэдээлэл
+            </label>
+          </div>
+        </div>
       </div>
-      <div></div>
+      <div>hi</div>
     </div>
   );
 };

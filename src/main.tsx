@@ -34,6 +34,7 @@ import OrderEdit from "./pages/orderEdit.tsx";
 import AddBranch from "./pages/addBranch.tsx";
 import { MobileHeader } from "./components/mobileHeader.tsx";
 import Indicator from "./pages/indicator.tsx";
+import Value from "./pages/value.tsx";
 
 function AppContent() {
   const [open, setOpen] = useState(false);
@@ -89,7 +90,8 @@ function AppContent() {
             <Route path="/product/create" element={<CreateProduct />} />
             <Route path="/order/create" element={<CreateOrder />} />
             <Route path="/brand/create" element={<CreateBrand />} />
-            <Route path="/indicator" element={<Indicator />} />
+            <Route path="/attribute" element={<Indicator />} />
+            <Route path="/attribute/:id" element={<Value />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/design" element={<Design />} />
             <Route path="/banner" element={<Banner />} />

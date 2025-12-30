@@ -45,7 +45,7 @@ const OrderDetails = () => {
           <div className="flex gap-2 items-center">
             <div
               onClick={() => navigate(`/order/${id}/edit`)}
-              className="bg-white h-10 px-4 py-2 border border-[#e7e3e4] inline-flex items-center cursor-pointer text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium"
+              className="bg-white h-10 px-4 py-2 border border-[#e7e3e4] inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-md font-medium"
             >
               <Icon icon="ri:settings-line" />
               Засах
