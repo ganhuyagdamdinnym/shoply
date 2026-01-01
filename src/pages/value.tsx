@@ -12,7 +12,9 @@ const Value = () => {
   const { id } = useParams();
 
   const [value, setValue] = useState<valueType | null>(null);
+  const [inputValue, setInputValue] = useState<string>("");
 
+  const clickEdit = () => {};
   const indicators: valueType[] = [
     {
       id: "1",
@@ -91,8 +93,8 @@ const Value = () => {
                       </td>
                       <td className="px-2 py-4 pr-6">
                         <div className="flex items-center gap-3 justify-end text-gray-400">
-                          <button className="hover:text-red-600 transition-colors">
-                            <Icon icon="lucide:trash-2" className="w-5 h-5" />
+                          <button className="hover:text-blue-600 transition-colors">
+                            <Icon icon="lucide:edit" className="w-5 h-5" />
                           </button>
                         </div>
                       </td>
