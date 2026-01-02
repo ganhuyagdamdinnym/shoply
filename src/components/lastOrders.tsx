@@ -12,10 +12,6 @@ export const LastOrders = () => {
             Хамгийн сүүлийн 6-н захиалга
           </h1>
         </div>
-        <div className="flex justify-between items-center p-2 bg-white rounded-lg w-full gap-1.5 sm:max-w-50! border border-[#f5f4f4]">
-          <p>Хүлээгдэж буй</p>
-          <Icon icon="mdi:arrow-bottom" width="20" />
-        </div>
       </div>
 
       <div>

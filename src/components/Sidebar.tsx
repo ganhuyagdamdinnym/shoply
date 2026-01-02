@@ -69,9 +69,7 @@ export const SideBar = () => {
         <img src="infitechLogo.png" className="w-40" />
       </div>
 
-      {/* SCROLL ХИЙГДЭХ ХЭСЭГ */}
       <div className="overflow-y-auto h-[calc(100%-140px)] pb-6">
-        {/* MAIN MENU */}
         <div className="flex flex-col">
           {primeDashboard.map((e) => (
             <NavLink
@@ -79,7 +77,7 @@ export const SideBar = () => {
               to={e.name}
               end={e.name === "/"}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-2 py-1 rounded-xl mt-1
+                `flex items-center gap-2 px-2 py-1.5 rounded-xl mt-1
                  hover:bg-gray-100
                  ${isActive ? "bg-gray-100 font-medium" : ""}`
               }
@@ -101,7 +99,6 @@ export const SideBar = () => {
         {/* DIVIDER */}
         <div className="w-full h-px mt-3 bg-[#e7e3e4]" />
 
-        {/* SYSTEM HEADER */}
         <button className="text-xs font-medium flex h-8 text-[#0b0809]/70 px-2 mt-3">
           Дэлгүүрийн тохиргоо
         </button>
@@ -112,7 +109,7 @@ export const SideBar = () => {
               key={e.name}
               to={e.name}
               className={({ isActive }) =>
-                `flex items-center gap-2 px-2 py-1 rounded-xl mt-1
+                `flex items-center gap-2 px-2 py-1.5 rounded-xl mt-1
                  hover:bg-gray-100
                  ${isActive ? "bg-gray-100 font-medium" : ""}`
               }

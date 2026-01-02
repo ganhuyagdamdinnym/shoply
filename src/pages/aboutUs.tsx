@@ -18,41 +18,6 @@ const AboutUs = () => {
         <div className="max-w-2xl mx-auto mt-6 w-full">
           <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
             {/* Toolbar */}
-            <div className="flex items-center gap-3 p-2 ">
-              <Icon
-                icon="mdi:format-bold"
-                className="cursor-pointer"
-                width={20}
-              />
-              <Icon
-                icon="mdi:format-italic"
-                className="cursor-pointer"
-                width={20}
-              />
-              <Icon
-                icon="mdi:format-underline"
-                className="cursor-pointer"
-                width={20}
-              />
-              <Icon
-                icon="mdi:link-variant"
-                className="cursor-pointer"
-                width={20}
-              />
-              <Icon
-                icon="mdi:link-variant-off"
-                className="cursor-pointer"
-                width={20}
-              />
-              <Icon
-                icon="mdi:format-list-bulleted"
-                className="cursor-pointer"
-                width={20}
-              />
-              <Icon icon="mdi:ruler" className="cursor-pointer" width={20} />
-              <Icon icon="mdi:undo" className="cursor-pointer" width={20} />
-              <Icon icon="mdi:redo" className="cursor-pointer" width={20} />
-            </div>
 
             {/* Textarea */}
             <textarea

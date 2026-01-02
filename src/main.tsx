@@ -52,7 +52,7 @@ function AppContent() {
   }
 
   return (
-    <div className="h-screen overflow-hidden bg-[#f5f4f4]">
+    <div className="h-screen overflow-hidden bg-[#f5f4f4] pb-4">
       <div className="flex h-full">
         {/* DESKTOP SIDEBAR */}
         <div className="hidden md:block w-67.5 shrink-0">

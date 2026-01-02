@@ -116,7 +116,13 @@ const Value = () => {
                       <td className="px-2 py-4 font-bold text-gray-900">
                         {val}
                       </td>
-                      <td className="px-2 py-4 pr-6 text-right">
+                      <td className="px-2 py-4 pr-6 text-right gap-2">
+                        <button
+                          onClick={() => handleEditClick(index, val)}
+                          className="text-gray-400 hover:text-red-600 transition-colors mr-2"
+                        >
+                          <Icon icon="lucide:trash" className="w-5 h-5" />
+                        </button>
                         <button
                           onClick={() => handleEditClick(index, val)}
                           className="text-gray-400 hover:text-blue-600 transition-colors"

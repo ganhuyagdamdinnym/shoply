@@ -39,7 +39,7 @@ export const ProductTable = (props: Props) => {
   return (
     <tr
       onClick={() => navigate(`/product/${name}`)}
-      className="border-b border-[#e7e3e4] hover:bg-gray-50 transition-colors"
+      className="border-b border-[#e7e3e4] hover:bg-gray-50 transition-colors cursor-pointer"
     >
       <td onClick={(e) => e.stopPropagation()} className="px-4 py-3">
         <input type="checkbox" className="rounded border-gray-300" />

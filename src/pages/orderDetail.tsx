@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useParams, useNavigate } from "react-router-dom";
-
+import { useCopyToClipboard } from "usehooks-ts";
 const orders: any = [
   {
     orderId: "12345",
@@ -27,6 +27,10 @@ const orders: any = [
 const OrderDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [value, copy] = useCopyToClipboard();
+  const handleCopy = () => {
+    copy("username");
+  };
   return (
     <main className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div>
@@ -248,6 +252,7 @@ const OrderDetails = () => {
                 <div className="flex gap-2 items-center justify-between px-2 py-1.5 hover:bg-[#f5f4f4] rounded-lg">
                   <div className="font-medium text-sm">Username</div>
                   <Icon
+                    onClick={() => handleCopy()}
                     icon="lucide:copy"
                     width={16}
                     className="lucide lucide-copy cursor-pointer text-[#71717b] hover:text-black transition-all duration-200"

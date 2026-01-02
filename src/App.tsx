@@ -2,20 +2,22 @@ import "./App.css";
 import { Icon } from "@iconify/react";
 import { RequireSettings } from "./components/requireSettings";
 import { LastOrders } from "./components/lastOrders";
+import { FastAction } from "./components/fastAction";
+import { OrderStatus } from "./components/orderStatus";
 function App() {
   return (
-    <div className="px-4  pt-4 pb-[80px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full flex flex-col gap-2">
+    <div className="px-4  pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full flex flex-col gap-2">
       <div className="flex flex-col gap-1">
         <p className="font-semibold text-2xl sm:text-3xl">
           Өдрийн мэнд, Санчир
         </p>
         <p className="text-sm text-[#71717b]">Shoply дэлгүүр</p>
       </div>
-      <div>
+      {/* <div>  
         <div></div>
         <div></div>
-      </div>
-      <div className="grid grid-cols-2 gap-4 xl:!grid-cols-4">
+      </div> */}
+      <div className="grid grid-cols-2 gap-4 xl:grid-cols-4!">
         <div className="bg-[#fcfcfc] border border-[#f5f4f4] rounded-xl p-3 sm:p-4">
           <p className="font-semibold  text-xs sm:text-xl text-[#71717b]">
             Энэ сарын захиалга
@@ -81,10 +83,16 @@ function App() {
           <p className="text-[#71717b] text-xs sm:text-sm">Энэ сар шинээр 0</p>
         </div>
       </div>
+      <RequireSettings />
       <div className="grid lg:grid-cols-2 gap-4 items-start">
-        <RequireSettings />
-        <LastOrders />
+        <FastAction />
+        <OrderStatus />
       </div>
+      <LastOrders />
+      {/* <div className="grid lg:grid-cols-2 gap-4 items-start">
+        <RequireSettings />
+        
+      </div> */}
     </div>
   );
 }

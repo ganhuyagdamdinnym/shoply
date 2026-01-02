@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Clock, CalendarX, X } from "lucide-react";
+import { CalendarX, X, ChevronDown } from "lucide-react";
 import { Icon } from "@iconify/react";
 
 interface ScheduleDay {
@@ -9,6 +9,15 @@ interface ScheduleDay {
   active: boolean;
 }
 
+// 24 цагийн жагсаалт үүсгэх функц (00:00 - 23:30)
+const TIME_OPTIONS = Array.from({ length: 48 }).map((_, i) => {
+  const hour = Math.floor(i / 2);
+  const min = i % 2 === 0 ? "00" : "30";
+  const ampm = hour >= 12 ? "PM" : "AM";
+  const displayHour = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+  return `${displayHour.toString().padStart(2, "0")}:${min} ${ampm}`;
+});
+
 const AddBranch: React.FC = () => {
   const [schedule, setSchedule] = useState<ScheduleDay[]>([
     { day: "Даваа", open: "09:00 AM", close: "06:00 PM", active: true },
@@ -16,25 +25,13 @@ const AddBranch: React.FC = () => {
     { day: "Лхагва", open: "09:00 AM", close: "06:00 PM", active: true },
     { day: "Пүрэв", open: "09:00 AM", close: "06:00 PM", active: true },
     { day: "Баасан", open: "09:00 AM", close: "06:00 PM", active: true },
-    { day: "Бямба", open: "09:00 AM", close: "06:00 PM", active: true },
+    { day: "Бямба", open: "10:00 AM", close: "04:00 PM", active: true },
     { day: "Ням", open: "09:00 AM", close: "06:00 PM", active: false },
   ]);
 
   const [isActiveBranch, setIsActiveBranch] = useState(true);
   const [image, setImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Зураг сонгох функц
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleTimeChange = (
     index: number,
@@ -53,88 +50,104 @@ const AddBranch: React.FC = () => {
   };
 
   return (
-    <main className="px-4 pt-4 md:mt-0 md:max-w-8xl mx-auto w-full transition-all duration-300">
-      <div className="mb-4 max-w-md w-full mx-auto p-6 mt-2 sm:mt-0 rounded-xl border bg-white border-[#e7e3e4]">
-        <h1 className="text-center font-gilroy text-xl font-semibold mb-8">
+    <main className="px-4 pt-4 pb-10 md:mt-0 md:max-w-8xl mx-auto w-full font-sans">
+      <div className="max-w-xl w-full mx-auto p-6 bg-white rounded-3xl border border-[#e7e3e4] shadow-sm">
+        <h1 className="text-center font-bold text-2xl mb-8">
           Шинээр салбар нэмэх
         </h1>
 
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-6">
           {/* Салбарын нэр */}
-          <div className="grid w-full items-center gap-1.5">
-            <label className="text-sm font-medium">
-              Салбарын нэр <span className="text-blue-500">*</span>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-sm font-semibold text-gray-700">
+              Салбарын нэр *
             </label>
             <input
               type="text"
-              placeholder="Салбарын нэрийг оруулна уу"
-              className="flex h-10 w-full rounded-md border border-[#e7e3e4] px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder="Жишээ нь: Төв салбар"
+              className="h-11 w-full rounded-xl border border-[#e7e3e4] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all"
             />
           </div>
 
           {/* Байршил */}
-          <div className="grid w-full gap-2">
-            <label className="text-sm font-medium">
-              Салбарын байршил <span className="text-blue-500">*</span>
+          <div className="flex flex-col gap-1.5">
+            <label className="text-sm font-semibold text-gray-700">
+              Байршил *
             </label>
             <textarea
-              placeholder="Жишээ нь: ХУД, 15-р хороо, 7-р байр гэх мэт"
-              className="bg-[#f5f4f4] border border-[#e7e3e4] min-h-20 w-full rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder="ХУД, 15-р хороо, Махатма Гандийн гудамж..."
+              className="bg-[#fcfcfc] border border-[#e7e3e4] min-h-24 w-full rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all"
             />
           </div>
 
           {/* Цагийн хуваарь */}
-          <div className="flex flex-col gap-4 mt-2">
-            <label className="text-sm font-medium">
+          <div className="flex flex-col gap-4">
+            <label className="text-sm font-semibold text-gray-700">
               Ажиллах цагийн хуваарь
             </label>
-            <div className="space-y-3">
+            <div className="bg-gray-50/50 p-4 rounded-2xl border border-[#f0eff0] space-y-3">
               {schedule.map((item, index) => (
                 <div
                   key={item.day}
                   className={`flex items-center gap-3 ${
-                    !item.active ? "opacity-40 grayscale" : ""
+                    !item.active ? "opacity-40" : ""
                   }`}
                 >
-                  <span className="text-sm font-medium text-gray-500 w-16">
+                  <span className="text-xs font-bold text-gray-500 w-14 uppercase tracking-tighter">
                     {item.day}
                   </span>
+
                   <div className="flex items-center gap-2 flex-1">
+                    {/* Нээх цаг */}
                     <div className="relative flex-1">
-                      <input
-                        type="text"
+                      <select
                         value={item.open}
                         onChange={(e) =>
                           handleTimeChange(index, "open", e.target.value)
                         }
-                        className="w-full h-10 border border-[#e7e3e4] rounded-xl px-3 pr-8 text-[13px] focus:outline-none"
                         disabled={!item.active}
-                      />
-                      <Clock className="absolute right-2.5 top-3 w-4 h-4 text-gray-400" />
+                        className="w-full h-9 pl-3 pr-8 bg-white border border-[#e7e3e4] rounded-lg text-[12px] appearance-none focus:outline-none focus:border-blue-400"
+                      >
+                        {TIME_OPTIONS.map((t) => (
+                          <option key={t} value={t}>
+                            {t}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="absolute right-2 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" />
                     </div>
-                    <span className="text-gray-400">-</span>
+
+                    <span className="text-gray-300">-</span>
+
+                    {/* Хаах цаг */}
                     <div className="relative flex-1">
-                      <input
-                        type="text"
+                      <select
                         value={item.close}
                         onChange={(e) =>
                           handleTimeChange(index, "close", e.target.value)
                         }
-                        className="w-full h-10 border border-[#e7e3e4] rounded-xl px-3 pr-8 text-[13px] focus:outline-none"
                         disabled={!item.active}
-                      />
-                      <Clock className="absolute right-2.5 top-3 w-4 h-4 text-gray-400" />
+                        className="w-full h-9 pl-3 pr-8 bg-white border border-[#e7e3e4] rounded-lg text-[12px] appearance-none focus:outline-none focus:border-blue-400"
+                      >
+                        {TIME_OPTIONS.map((t) => (
+                          <option key={t} value={t}>
+                            {t}
+                          </option>
+                        ))}
+                      </select>
+                      <ChevronDown className="absolute right-2 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" />
                     </div>
+
                     <button
                       type="button"
                       onClick={() => toggleActive(index)}
-                      className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                      className={`p-2 rounded-lg transition-colors ${
+                        item.active
+                          ? "text-red-400 hover:bg-red-50"
+                          : "text-gray-400"
+                      }`}
                     >
-                      <CalendarX
-                        className={`w-5 h-5 ${
-                          item.active ? "text-green-600" : "text-gray-400"
-                        }`}
-                      />
+                      <CalendarX className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
@@ -142,19 +155,14 @@ const AddBranch: React.FC = () => {
             </div>
           </div>
 
-          {/* Зураг оруулах хэсэг */}
-          <div className="mt-2">
-            <label className="text-sm font-medium">Салбарын үндсэн зураг</label>
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              ref={fileInputRef}
-              onChange={handleImageChange}
-            />
+          {/* Зураг оруулах */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-sm font-semibold text-gray-700">
+              Салбарын зураг
+            </label>
             <div
               onClick={() => fileInputRef.current?.click()}
-              className="relative aspect-video w-full bg-[#f5f4f4] border-2 border-dashed border-[#e7e3e4] rounded-xl flex mt-2 items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors overflow-hidden"
+              className="relative aspect-video w-full bg-gray-50 border-2 border-dashed border-[#e7e3e4] rounded-2xl flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-all overflow-hidden"
             >
               {image ? (
                 <>
@@ -168,39 +176,57 @@ const AddBranch: React.FC = () => {
                       e.stopPropagation();
                       setImage(null);
                     }}
-                    className="absolute top-2 right-2 p-1 bg-white/80 rounded-full hover:bg-white shadow-sm"
+                    className="absolute top-3 right-3 p-1.5 bg-black/50 text-white rounded-full hover:bg-black/70"
                   >
-                    <X className="w-4 h-4 text-gray-600" />
+                    <X className="w-4 h-4" />
                   </button>
                 </>
               ) : (
-                <div className="flex flex-col items-center">
-                  <Icon icon="ic:outline-photo" width="40" color="#3B3838" />
-                  <span className="text-xs text-gray-400 mt-1">
-                    Зураг сонгох
+                <div className="flex flex-col items-center gap-2">
+                  <div className="p-3 bg-white rounded-full shadow-sm">
+                    <Icon
+                      icon="lucide:image-plus"
+                      width="24"
+                      className="text-gray-400"
+                    />
+                  </div>
+                  <span className="text-xs text-gray-400">
+                    Зураг хуулах (JPG, PNG)
                   </span>
                 </div>
               )}
             </div>
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const reader = new FileReader();
+                  reader.onloadend = () => setImage(reader.result as string);
+                  reader.readAsDataURL(file);
+                }
+              }}
+            />
           </div>
 
-          {/* Идэвхтэй эсэх toggle */}
-          <div className="flex justify-between items-center gap-4 bg-white border border-[#e7e3e4] px-4 py-3 rounded-lg">
-            <div className="flex flex-col pr-4">
-              <h4 className="font-gilroy font-medium leading-4.5">
-                Идэвхтэй салбар эсэх
-              </h4>
-              <p className="text-xs text-[#71717b] font-medium leading-4 mt-0.5">
-                Захиалга хийгдэх үед хэрэглэгч сонгон очиж авах боломжтой эсэх.
-              </p>
+          {/* Toggle */}
+          <div className="flex justify-between items-center p-4 bg-gray-50 rounded-2xl border border-[#e7e3e4]">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-sm font-bold text-gray-800">
+                Идэвхтэй салбар
+              </span>
+              <span className="text-[11px] text-gray-500">
+                Хэрэглэгч энэ салбарыг сонгож болох эсэх
+              </span>
             </div>
-
-            {/* Toggle Switch */}
             <button
               type="button"
               onClick={() => setIsActiveBranch(!isActiveBranch)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
-                isActiveBranch ? "bg-black" : "bg-gray-200"
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all ${
+                isActiveBranch ? "bg-black" : "bg-gray-300"
               }`}
             >
               <span
@@ -211,12 +237,10 @@ const AddBranch: React.FC = () => {
             </button>
           </div>
 
-          <div className="flex justify-end">
-            <button className="text-white inline-flex items-center text-sm justify-center gap-2 whitespace-nowrap cursor-pointer rounded-xl font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-linear-to-r from-blue-500 to-indigo-400  h-10 px-4 py-2  ">
-              <Icon icon="uil:save" width="24" color="white" />
-              Xадгалах
-            </button>
-          </div>
+          <button className="w-full py-3.5 bg-black text-white rounded-2xl font-bold text-sm hover:bg-gray-800 transition-all flex items-center justify-center gap-2 shadow-lg shadow-gray-200">
+            <Icon icon="lucide:save" width="20" />
+            Салбарыг хадгалах
+          </button>
         </div>
       </div>
     </main>
