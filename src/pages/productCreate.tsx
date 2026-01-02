@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CreatingProductInfo } from "../components/creatingProductInfo";
 function CreateProduct() {
   return (
-    <div className="px-4 pt-4 pb-[80px] mt-[56px] md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
+    <div className="px-4 pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
       <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
         <div className="flex flex-col gap-1">
           <p className="font-semibold text-2xl sm:text-3xl">Бараа нэмэх</p>
@@ -106,7 +106,7 @@ function CreateProduct() {
                   />
                 </button>
               </div>
-            </div>{" "}
+            </div>
             <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
               <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
                 Брэнд

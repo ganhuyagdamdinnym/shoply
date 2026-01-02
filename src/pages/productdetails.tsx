@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import { DetailedInfo } from "../components/detailedInfo";
+import { DetailedInfo } from "../components/detailedInfoProduct";
 const images = ["jordan.png"];
 const ProductDetails = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -206,7 +206,7 @@ const ProductDetails = () => {
                           </div>
                         </div>
                         <div className="col-span-full">
-                          <div className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-3 py-2">
                             <button
                               type="button"
                               onClick={() => setIsActive(!isActive)}
@@ -220,10 +220,16 @@ const ProductDetails = () => {
                                 }`}
                               />
                             </button>
-                            <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">
+                            <label
+                              className="text-sm font-medium cursor-pointer"
+                              onClick={() => setIsActive(!isActive)}
+                            >
                               Дэлгэрэнгүй мэдээлэл
                             </label>
                           </div>
+
+                          {/* ЭНД DetailedInfo-г дуудаж байна */}
+                          {isActive && <DetailedInfo />}
                         </div>
                       </div>
                     </div>
@@ -231,6 +237,7 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
+
             <div className="col-span-full xl:col-span-4 flex flex-col gap-4">
               <div className="p-4 rounded-xl border border-[#e7e3e4] bg-white">
                 <label className="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 mb-1">

@@ -14,7 +14,7 @@ const primeDashboard = [
   { name: "/category", icon: "quill:sort", text: "Ангилал" },
   { name: "/brand", icon: "tabler:chart-circles", text: "Брэнд" },
   { name: "/attribute", icon: "gg:size", text: "Үзүүлэлтүүд" },
-  { name: "/user", icon: "tabler:users", text: "Хэрэглэгч" },
+  { name: "/user", icon: "tabler:users", text: "Хэрэглэгчид" },
 ];
 
 const systemHeader = [

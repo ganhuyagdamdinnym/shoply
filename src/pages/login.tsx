@@ -3,15 +3,8 @@ import { Icon } from "@iconify/react";
 const Login = () => {
   return (
     <div className="w-full h-screen flex bg-white font-sans">
-      {/* LEFT SIDE */}
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 relative">
-        {/* LOGO */}
-        <div className="absolute top-8 left-8">
-          <img src="infitechLogo.png" className="w-32" alt="Shopmn" />
-        </div>
-
-        {/* FORM CONTAINER */}
-        <div className="w-full max-w-[400px]">
+        <div className="w-full max-w-100">
           <h1 className="text-[28px] font-bold text-center mb-8 text-[#111827]">
             Системд нэвтрэх
           </h1>
@@ -48,13 +41,13 @@ const Login = () => {
           </div>
 
           {/* LOGIN BUTTON */}
-          <button className="w-full h-[52px] rounded-xl bg-gradient-to-r from-[#3b82f6] to-[#818cf8] text-white font-bold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-blue-100">
+          <button className="w-full h-13 rounded-xl bg-linear-to-r from-[#3b82f6] to-[#818cf8] text-white font-bold text-base flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-blue-100">
             <Icon icon="lucide:scan-face" width="22" />
             Нэвтрэх
           </button>
 
           {/* REGISTER */}
-          <div className="mt-6 h-[48px] flex items-center justify-center bg-[#f3f4f6] rounded-xl text-[14px] text-gray-500">
+          <div className="mt-6 h-12 flex items-center justify-center bg-[#f3f4f6] rounded-xl text-[14px] text-gray-500">
             Шинэ хэрэглэгч үү?{" "}
             <span className="text-blue-600 font-bold ml-2 cursor-pointer hover:underline">
               Бүртгэл үүсгэх
@@ -63,7 +56,7 @@ const Login = () => {
 
           {/* DIVIDER */}
           <div className="flex items-center my-8">
-            <div className="flex-1 h-[1px] bg-gray-100" />
+            <div className="flex-1 h-px bg-gray-100" />
             <span className="px-4 text-[13px] text-gray-300 font-medium">
               Эсвэл
             </span>

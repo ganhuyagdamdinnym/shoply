@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 import { Link, NavLink } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 type Props = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -15,7 +15,7 @@ const primeDashboard = [
   { name: "/category", icon: "quill:sort", text: "Ангилал" },
   { name: "/brand", icon: "tabler:chart-circles", text: "Брэнд" },
   { name: "/indicator", icon: "gg:size", text: "Үзүүлэлтүүд" },
-  { name: "/user", icon: "tabler:users", text: "Хэрэглэгч" },
+  { name: "/user", icon: "tabler:users", text: "Хэрэглэгчид" },
 ];
 
 const systemHeader = [

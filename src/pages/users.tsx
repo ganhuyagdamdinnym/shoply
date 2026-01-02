@@ -1,195 +1,181 @@
 import { Icon } from "@iconify/react";
 import "../App.css";
-import { Link } from "react-router-dom";
 
 function Users() {
-  const orders: any = [
+  // Жишээ дата: Хэрэглэгчийн мэдээлэлд тохируулж өөрчлөв
+  const users: any = [
     {
-      orderId: "12345",
-      orderNumber: "SH0423",
-      status: "цуцлагдсан",
-      price: 10000,
-      user: "Daimaa",
-      userPhoneNumber: "86321240",
-      orderType: "хүргэлтээр",
-      type: "transfort",
-      orderDate: "2025.12.12",
+      userId: "U001",
+      name: "Daimaa",
+      email: "daimaa@example.com",
+      phoneNumber: "86321240",
+      status: "идэвхтэй",
+      totalOrders: 12,
+      totalSpent: 120000,
+      joinedDate: "2024.11.15",
     },
     {
-      orderId: "1234567",
-      orderNumber: "SH2007",
-      status: "амжилттай",
-      price: 10000,
-      user: "Daimaa",
-      orderType: "delivery",
-      type: "transfort",
-      orderDate: "2025.12.12",
+      userId: "U002",
+      name: "Boldoo",
+      email: "boldoo@example.com",
+      phoneNumber: "99112233",
+      status: "түдгэлзүүлсэн",
+      totalOrders: 2,
+      totalSpent: 25000,
+      joinedDate: "2025.01.10",
     },
   ];
+
   return (
-    <div className="pt-4 pb-[80px] md:mt-0 md:px-2 md:py-6 bg-[#f5f4f4] h-screen md:max-w-8xl mx-auto w-full">
-      <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center ">
+    <div className="pt-4 pb-20 md:mt-0 md:px-6 md:py-6 bg-[#f5f4f4] min-h-screen md:max-w-8xl mx-auto w-full font-sans">
+      {/* Header */}
+      <div className="w-full flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
         <div className="flex flex-col gap-1">
-          <p className="font-semibold text-2xl sm:text-3xl">Хэрэглэгч</p>
+          <h1 className="font-semibold text-2xl sm:text-3xl text-gray-900">
+            Хэрэглэгчид
+          </h1>
           <p className="text-sm text-[#71717b]">
-            Бүх хэрэглэгчдийн дэлгэрэнгүй мэдээлэл
+            Бүх хэрэглэгчдийн дэлгэрэнгүй мэдээлэл болон бүртгэл
           </p>
         </div>
+        <button className="inline-flex items-center justify-center gap-2 bg-black text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-800 transition-all">
+          <Icon icon="lucide:user-plus" width="18" />
+          Хэрэглэгч нэмэх
+        </button>
       </div>
-      <div>
-        <div className="w-full flex items-center justify-between mt-4 min-w-200">
-          <div className="relative w-[320px] h-10">
-            <div className="text-[#71717b] absolute left-px top-px p-2.5">
-              <Icon icon="material-symbols-light:search-rounded" width="20" />
-            </div>
 
-            <input
-              type="text"
-              placeholder="Нэр, имэйл, утасаар хайх..."
-              className="flex h-10 pl-9 w-full rounded-md py-2 bg-white sm:text-sm border border-[#e7e3e4]  focus:outline-none focus:border-blue-500 focus:border-2"
-            />
+      {/* Search & Filter */}
+      <div className="w-full flex items-center justify-between mt-6">
+        <div className="relative w-full max-w-90">
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+            <Icon icon="lucide:search" width="18" />
+          </div>
+          <input
+            type="text"
+            placeholder="Нэр, имэйл, утсаар хайх..."
+            className="h-10 pl-10 pr-4 w-full rounded-xl bg-white text-sm border border-[#e7e3e4] focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-500 transition-all shadow-sm"
+          />
+        </div>
+        <div className="flex gap-2">
+          <button className="flex items-center gap-2 bg-white border border-[#e7e3e4] px-3 py-2 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50">
+            <Icon icon="lucide:filter" width="16" />
+            Шүүлтүүр
+          </button>
+        </div>
+      </div>
+
+      {/* Table Section */}
+      {!users || users.length === 0 ? (
+        <div className="w-full mt-6 rounded-2xl border border-[#e7e3e4] bg-white">
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <div className="bg-gray-50 p-4 rounded-full mb-4">
+              <Icon icon="lucide:users" width="40" className="text-gray-300" />
+            </div>
+            <h3 className="text-lg font-medium text-gray-900">
+              Хэрэглэгч олдсонгүй
+            </h3>
+            <p className="text-[#71717b] text-sm mt-1">
+              Одоогоор бүртгэлтэй хэрэглэгч байхгүй байна.
+            </p>
           </div>
         </div>
-        {orders == "" ? (
-          <div className="w-full mt-4 rounded-md border border-[#e7e3e4]">
-            <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-lg border-dashed p-6 text-center text-balance md:p-12">
-              <div className="flex max-w-sm flex-col items-center gap-2 text-center">
-                <Icon
-                  icon="material-symbols-light:border-all-outline-rounded"
-                  width="32"
-                />
-                <div className="text-lg font-medium tracking-tight">
-                  Захиалга хоосон байна
-                </div>
-                <div className="text-[#71717b] [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4">
-                  Одоогоор захиалга бүртгэгдээгүй байна
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="w-full mt-4 rounded-xl border border-[#e7e3e4] overflow-hidden min-w-250">
-            <div className="w-full overflow-x-auto">
-              <table className="w-full text-sm border-collapse">
-                <thead>
-                  <tr className="bg-white border-b border-[#e7e3e4]">
-                    <th className="p-4 w-10">
+      ) : (
+        <div className="w-full mt-6 rounded-2xl border border-[#e7e3e4] overflow-hidden bg-white shadow-sm">
+          <div className="w-full overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-gray-50/50 border-b border-[#e7e3e4]">
+                  <th className="p-4 w-12">
+                    <input
+                      type="checkbox"
+                      className="rounded-md border-gray-300 accent-black"
+                    />
+                  </th>
+                  <th className="py-4 px-3 text-left font-semibold text-gray-600">
+                    Хэрэглэгч
+                  </th>
+                  <th className="py-4 px-3 text-left font-semibold text-gray-600">
+                    Төлөв
+                  </th>
+                  <th className="py-4 px-3 text-left font-semibold text-gray-600">
+                    <div className="flex items-center gap-1">
+                      Захиалга{" "}
+                      <Icon icon="lucide:chevrons-up-down" width="14" />
+                    </div>
+                  </th>
+                  <th className="py-4 px-3 text-left font-semibold text-gray-600">
+                    Нийт зарцуулалт
+                  </th>
+                  <th className="py-4 px-3 text-left font-semibold text-gray-600">
+                    Бүртгүүлсэн
+                  </th>
+                  <th className="py-4 px-3 w-16"></th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#e7e3e4]">
+                {users.map((user: any, index: number) => (
+                  <tr
+                    key={index}
+                    className="hover:bg-gray-50/50 transition-colors group"
+                  >
+                    <td className="p-4">
                       <input
                         type="checkbox"
-                        className="rounded border-gray-300"
+                        className="rounded-md border-gray-300 accent-black"
                       />
-                    </th>
-                    <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      Хэрэглэгчийн #
-                    </th>
-                    <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      Төлөв
-                    </th>
-                    <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      <div className="flex items-center gap-1">
-                        Үнийн дүн{" "}
-                        <Icon icon="lucide:arrow-up-down" className="w-4 h-4" />
-                      </div>
-                    </th>
-                    <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      Нэр
-                    </th>
-                    <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      Захиалгын төрөл
-                    </th>
-                    <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      Төлөх хэлбэр
-                    </th>
-                    <th className="py-4 px-2 text-left font-semibold text-gray-900">
-                      <div className="flex items-center gap-1">
-                        Захиалсан огноо{" "}
-                        <Icon icon="lucide:arrow-up-down" className="w-4 h-4" />
-                      </div>
-                    </th>
-                    <th className="py-4 px-2 w-20"></th>
-                  </tr>
-                </thead>
-                <tbody className="bg-[#f9f9f9]">
-                  {orders?.map((order: any, index: any) => (
-                    <tr
-                      key={index}
-                      className="border-b border-[#e7e3e4] hover:bg-white transition-colors group"
-                    >
-                      <td className="p-4">
-                        <input
-                          type="checkbox"
-                          className="rounded border-gray-300"
-                        />
-                      </td>
-                      <td className="px-2 py-4 font-medium text-gray-500">
-                        {order.orderNumber.slice(0, 4)}
-                        <span className="text-gray-900 font-bold">
-                          {order.orderNumber.slice(4)}
-                        </span>
-                      </td>
-                      <td className="px-2 py-4">
-                        {order.status === "цуцлагдсан" ? (
-                          <span className="px-3 py-1.5 rounded-lg bg-[#fee2e2] text-[#b91c1c] font-bold text-xs">
-                            Цуцлагдсан
-                          </span>
-                        ) : (
-                          <span className="px-3 py-1.5 rounded-lg bg-green-100 text-green-700 font-bold text-xs">
-                            {order.status}
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-2 py-4 font-bold text-base">
-                        {order.price?.toLocaleString()}₮
-                      </td>
-                      <td className="px-2 py-4">
+                    </td>
+                    <td className="px-3 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-9 h-9 rounded-full bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xs">
+                          {user.name.charAt(0)}
+                        </div>
                         <div className="flex flex-col">
-                          <span className="font-bold text-gray-900 tracking-tight">
-                            <span className="text-gray-400 font-medium">
-                              A.{" "}
-                            </span>
-                            {order.user}
+                          <span className="font-bold text-gray-900">
+                            {user.name}
                           </span>
                           <span className="text-gray-500 text-xs">
-                            {order.userPhoneNumber}
+                            {user.email}
                           </span>
                         </div>
-                      </td>
-                      <td className="px-2 py-4">
-                        <div className="flex flex-col">
-                          <span className="px-3 py-0.5 rounded-full bg-[#dbeafe] text-[#3b82f6] font-semibold text-[11px] w-fit">
-                            Хүргэлтээр
-                          </span>
-                          <span className="text-[11px] text-gray-400 mt-0.5 ml-1">
-                            Улаанбаатар
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-2 py-4 font-bold text-gray-900">
-                        {order.type}
-                      </td>
-                      <td className="px-2 py-4 text-gray-600 font-medium">
-                        {order.orderDate}
-                      </td>
-                      <td className="px-2 py-4">
-                        <div className="flex items-center gap-3 justify-end text-gray-400">
-                          <Icon
-                            icon="lucide:eye"
-                            className="w-5 h-5 cursor-pointer hover:text-gray-900"
-                          />
-                          <Icon
-                            icon="tabler:dots"
-                            className="w-6 h-6 cursor-pointer hover:text-gray-900"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </div>
+                    </td>
+                    <td className="px-3 py-4">
+                      <span
+                        className={`px-2.5 py-1 rounded-lg font-medium text-[14px] ${
+                          user.status === "идэвхтэй"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
+                        }`}
+                      >
+                        {user.status}
+                      </span>
+                    </td>
+                    <td className="px-3 py-4 font-medium text-gray-700">
+                      {user.totalOrders} удаа
+                    </td>
+                    <td className="px-3 py-4 font-bold text-gray-900 text-base">
+                      {user.totalSpent.toLocaleString()}₮
+                    </td>
+                    <td className="px-3 py-4 text-gray-500 font-medium">
+                      {user.joinedDate}
+                    </td>
+                    <td className="px-3 py-4 text-right">
+                      <div className="flex items-center gap-2 justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button className="p-2 hover:bg-white rounded-lg border border-transparent hover:border-[#e7e3e4] shadow-sm transition-all text-gray-500 hover:text-black">
+                          <Icon icon="lucide:edit-3" width="18" />
+                        </button>
+                        <button className="p-2 hover:bg-white rounded-lg border border-transparent hover:border-[#e7e3e4] shadow-sm transition-all text-gray-500 hover:text-red-600">
+                          <Icon icon="lucide:trash-2" width="18" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
