@@ -84,11 +84,12 @@ function App() {
         </div>
       </div>
       <RequireSettings />
+      <LastOrders />
       <div className="grid lg:grid-cols-2 gap-4 items-start">
         <FastAction />
         <OrderStatus />
       </div>
-      <LastOrders />
+
       {/* <div className="grid lg:grid-cols-2 gap-4 items-start">
         <RequireSettings />
         

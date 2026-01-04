@@ -110,7 +110,7 @@ function Order() {
                   <div key={type} className="relative">
                     <button
                       onClick={() => handleToggle(type)}
-                      className="flex justify-center bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg w-30"
+                      className="flex justify-center h-8 bg-white items-center gap-1 border border-[#e7e3e4] py-1 px-3 rounded-lg w-30"
                     >
                       <span className="text-[14px]">{options[type][0]}</span>
                       <Icon
@@ -127,6 +127,7 @@ function Order() {
                           <li
                             key={option}
                             onClick={() => {
+                              //alert("hi");
                               console.log(type, option);
                               setOpenDropdown(null);
                             }}
