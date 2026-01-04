@@ -94,6 +94,7 @@ export const ProductTable = (props: Props) => {
 
         {showMenu && (
           <div
+            onClick={(e) => e.stopPropagation()}
             ref={menuRef}
             className="absolute right-4 top-12 w-48 bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] border border-gray-100 z-50 py-1.5"
           >
