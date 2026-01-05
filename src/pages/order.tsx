@@ -10,23 +10,12 @@ function Order() {
   const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
+  const [actionMenuId, setActionMenuId] = useState<string | null>(null);
   const options: Record<OptionType, string[]> = {
     хэлбэр: ["Бүх хэлбэр", "Онлайн", "Оффлайн"],
     төрөл: ["Бүх төрөл", "Сургалт", "Ажлын байр", "Туршлага"],
     салбар: ["Бүх салбар", "IT", "Боловсрол", "Эрүүл мэнд"],
     төлөв: ["Бүх төлөв", "Идэвхтэй", "Хаагдсан"],
-  };
-  const handleAction = (type: string) => {
-    if (type === "success") {
-      toast.success("Захиалга амжилттай хүргэгдлээ", {
-        description: "Хэрэглэгчид мэдэгдэл очсон.",
-      });
-    } else {
-      toast.error("Алдал гарлаа", {
-        description: "Дахин оролдоно уу.",
-      });
-    }
   };
   const handleToggle = (type: string) => {
     setOpenDropdown(openDropdown === type ? null : type);
@@ -43,6 +32,11 @@ function Order() {
     } else {
       setSelectedIds([]);
     }
+  };
+  const handleCopy = (orderNumber: string) => {
+    navigator.clipboard.writeText(orderNumber);
+    toast.success(`Дугаар хуулагдлаа: ${orderNumber}`);
+    setActionMenuId(null); // Цонхыг хаах
   };
   const orders: any = [
     {
@@ -274,18 +268,54 @@ function Order() {
                       <td className="px-2 py-4 text-gray-600 font-medium">
                         {order.orderDate}
                       </td>
-                      <td className="px-2 py-4">
+                      <td className="px-2 py-4 relative">
                         <div className="flex items-center gap-3 justify-end text-gray-400">
                           <Icon
                             icon="lucide:eye"
                             className="w-5 h-5 cursor-pointer hover:text-gray-900"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/order/${order.orderId}`);
+                            }}
                           />
-                          <div onClick={(e) => e.stopPropagation()}>
+                          <div
+                            className="relative"
+                            onClick={(e) => e.stopPropagation()}
+                          >
                             <Icon
-                              onClick={() => handleAction("success")}
+                              onClick={() =>
+                                setActionMenuId(
+                                  actionMenuId === order.orderId
+                                    ? null
+                                    : order.orderId
+                                )
+                              }
                               icon="tabler:dots"
                               className="w-6 h-6 cursor-pointer hover:text-gray-900"
                             />
+
+                            {/* Popover Menu */}
+                            {actionMenuId === order.orderId && (
+                              <>
+                                {/* Дэлгэцийн хаана ч дарсан хаагддаг болгох Backdrop */}
+                                <div
+                                  className="fixed inset-0 z-10"
+                                  onClick={() => setActionMenuId(null)}
+                                ></div>
+
+                                <div className="absolute right-0 bottom-px w-60 bg-white rounded-lg shadow-xl border border-gray-100 z-20 py-1 animate-in fade-in zoom-in duration-200">
+                                  <button
+                                    onClick={() =>
+                                      handleCopy(order.orderNumber)
+                                    }
+                                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                                  >
+                                    <Icon icon="lucide:copy" width="16" />
+                                    Захиалгын дугаар хуулах
+                                  </button>
+                                </div>
+                              </>
+                            )}
                           </div>
                         </div>
                       </td>

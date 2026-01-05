@@ -18,7 +18,12 @@ export const MobileHeader = (props: Props) => {
       >
         <Icon icon="quill:hamburger" width={20} />
       </button>
-      <img src="infitechLogo.png" className="w-30" alt="logo" />
+      <Link
+        to="/"
+        className="h-14 flex items-center px-4 hover:opacity-80 transition-opacity"
+      >
+        <img src="/Energizer.svg" alt="Energized Logo" className="w-40" />
+      </Link>
       <div
         onClick={() => setIsClickProfileButton(true)}
         className="w-10 h-10 rounded-full bg-green-950"

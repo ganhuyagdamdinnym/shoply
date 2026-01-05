@@ -60,7 +60,11 @@ export const OrderStatus = () => {
         </div>
         <div className="bg-[#b91c1c]/10 border border-[#0000] hover:border-gray-400 rounded-lg p-3 transition-all">
           <div className="flex items-center gap-2 mb-2">
-            <Icon icon="famicons:time-outline" color="#b91c1c" />
+            <Icon
+              width={24}
+              icon="material-symbols:cancel-outline-rounded"
+              color="#b91c1c"
+            />
             <label className="text-xs font-semibold text-[#71717b]">
               Цуцлагдсан
             </label>
@@ -72,7 +76,7 @@ export const OrderStatus = () => {
         </div>
         <div className="bg-[#e11d48]/10 border border-[#0000] hover:border-gray-400 rounded-lg p-3 transition-all">
           <div className="flex items-center gap-2 mb-2">
-            <Icon icon="famicons:time-outline" color="#e11d48" />
+            <Icon icon="system-uicons:reset" color="#e11d48" width={24} />
             <label className="text-xs font-semibold text-[#71717b]">
               Буцаагдсан
             </label>

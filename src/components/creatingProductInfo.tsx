@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
-import { useState } from "react";
-
+import { useState, type ChangeEvent } from "react";
+import { toast, Toaster } from "sonner";
 // Backend-ээс ирэх боломжит атрибутууд
 const AVAILABLE_ATTRIBUTES = [
   { id: "1", name: "Өнгө", values: ["Хар", "Цагаан", "Улаан", "Цэнхэр"] },
@@ -9,10 +9,12 @@ const AVAILABLE_ATTRIBUTES = [
 
 export function CreatingProductInfo() {
   const [isActive, setIsActive] = useState<boolean>(false);
-
+  const [images, setImages] = useState<File[]>([]);
   // Үндсэн мэдээллийн state
   const [basePrice, setBasePrice] = useState("");
   const [baseStock, setBaseStock] = useState("");
+  const [lowerPrice, setLowerPrice] = useState<number>();
+  const [lowerPercent, setLowerPercent] = useState("");
 
   // Хувилбаруудыг (Attributes) хадгалах state
   const [selectedAttributes, setSelectedAttributes] = useState<
@@ -48,23 +50,101 @@ export function CreatingProductInfo() {
     setSelectedAttributes(newAttrs);
   };
 
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = Array.from(e.target.files);
+      // Өмнөх зургууд дээр нэмэх (Нийт 5-аас илүүгүй гэх мэт хязгаар тавьж болно)
+      setImages((prev) => [...prev, ...newFiles]);
+    }
+  };
+  const removeImage = (index: number) => {
+    setImages(images.filter((_, i) => i !== index));
+  };
+
+  const handlePercent = (value: string) => {
+    const percent = Number(value);
+    const bPrice = Number(basePrice);
+
+    setLowerPercent(value);
+    if (percent > 100 || percent < 0) {
+      toast.error("", {
+        description: "Хямдралын хувь 1-100 хооронд байх ёстой",
+      });
+      return;
+    }
+    if (bPrice > 0 && percent >= 0) {
+      const sPrice = Math.round(bPrice * (1 - percent / 100));
+      console.log("dhh", sPrice);
+      setLowerPrice(sPrice);
+    } else {
+      setLowerPrice(0);
+    }
+  };
+
+  const handleLowerPrice = (value: string) => {
+    const sPrice = Number(value);
+    const bPrice = Number(basePrice);
+
+    setLowerPrice(sPrice);
+    if (sPrice > bPrice) {
+      toast.error("", {
+        description: "Үндсэн үнэ хямдарсан үнээс их байх ёстой",
+      });
+      return;
+    }
+    if (bPrice > 0 && sPrice > 0) {
+      const percent = Math.round(((bPrice - sPrice) / bPrice) * 100);
+      setLowerPercent(percent.toString());
+    } else {
+      setLowerPercent("");
+    }
+  };
+
   return (
     <div className="p-6 max-w-5xl mx-auto font-sans text-gray-900">
+      <Toaster position="top-right" richColors />
       <div className="flex flex-col gap-6">
         {/* 1. Зураг оруулах хэсэг */}
-        <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
-          <label className="flex items-center gap-2 text-sm font-semibold mb-3">
-            Барааны төрлийн зураг
-          </label>
-          <div className="bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl py-8 flex flex-col justify-center items-center">
-            <div className="text-sm text-gray-500 text-center px-6">
-              PNG, JPG, WEBP (Ихдээ 1 MB)
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {/* Оруулсан зургуудыг харуулах */}
+          {images.map((file, index) => (
+            <div
+              key={index}
+              className="relative group aspect-square rounded-xl overflow-hidden border border-gray-100 bg-gray-50"
+            >
+              <img
+                src={URL.createObjectURL(file)}
+                alt="product"
+                className="w-full h-full object-cover"
+              />
+              {/* Устгах товч - Зөвхөн hover үед харагдана */}
+              <button
+                onClick={() => removeImage(index)}
+                className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <Icon icon="lucide:x" width="14" />
+              </button>
             </div>
-            <button className="mt-4 flex items-center gap-2 text-sm font-medium bg-white border border-gray-200 rounded-lg px-4 py-2 hover:bg-gray-50 transition-all shadow-sm">
-              <Icon icon="ic:outline-photo" width="20" />
-              Зураг оруулах
-            </button>
-          </div>
+          ))}
+
+          {/* Зураг нэмэх товч (Input) */}
+          <label className="flex flex-col items-center justify-center aspect-square border-2 border-dashed border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-all">
+            <Icon
+              icon="lucide:image-plus"
+              width="24"
+              className="text-gray-400"
+            />
+            <span className="text-[10px] mt-2 font-medium text-gray-500">
+              Зураг нэмэх
+            </span>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+            />
+          </label>
         </div>
 
         {/* 2. Үндсэн үнэ болон Үлдэгдэл */}
@@ -100,27 +180,45 @@ export function CreatingProductInfo() {
             </div>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-semibold text-gray-400">
+            <label
+              className={`Ptext-sm font-semibold ${
+                basePrice != "" ? "" : "text-gray-400"
+              } `}
+            >
               Хямдарсан үнэ
             </label>
-            <div className="relative flex h-10 items-center rounded-lg border border-gray-100 bg-gray-50 px-3">
+            <div className="relative flex h-10 items-center rounded-lg border border-gray-300 bg-gray-50 px-3">
               <input
-                disabled
+                onChange={(e) => handleLowerPrice(e.target.value)}
+                disabled={!basePrice}
+                type="number"
+                value={lowerPrice}
                 placeholder="5,000"
-                className="flex-1 bg-transparent text-sm outline-none cursor-not-allowed"
+                className={`flex-1 bg-transparent text-sm outline-none ${
+                  !basePrice ? "cursor-not-allowed opacity-50" : "cursor-text"
+                }`}
               />
               <span className="text-sm text-gray-300 font-medium">₮</span>
             </div>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-semibold text-gray-400">
+            <label
+              className={`Ptext-sm font-semibold ${
+                basePrice != "" ? "" : "text-gray-400"
+              } `}
+            >
               Хямдрал %
             </label>
-            <div className="relative flex h-10 items-center rounded-lg border border-gray-100 bg-gray-50 px-3">
+            <div className="relative flex h-10 items-center rounded-lg border border-gray-300 bg-gray-50 px-3">
               <input
-                disabled
+                onChange={(e) => handlePercent(e.target.value)}
+                disabled={!basePrice}
+                value={lowerPercent}
+                type="number"
                 placeholder="50"
-                className="flex-1 bg-transparent text-sm outline-none cursor-not-allowed"
+                className={`flex-1 bg-transparent text-sm outline-none ${
+                  !basePrice ? "cursor-not-allowed opacity-50" : "cursor-text"
+                }`}
               />
               <span className="text-sm text-gray-300 font-medium">%</span>
             </div>

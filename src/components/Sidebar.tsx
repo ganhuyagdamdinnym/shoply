@@ -65,9 +65,12 @@ export const SideBar = () => {
       fixed top-2 left-2 hidden md:block "
     >
       {/* LOGO */}
-      <div className="h-14 flex items-center">
-        <img src="infitechLogo.png" className="w-40" />
-      </div>
+      <Link
+        to="/"
+        className="h-14 flex items-center px-4 hover:opacity-80 transition-opacity"
+      >
+        <img src="/Energizer.svg" alt="Energized Logo" className="w-40" />
+      </Link>
 
       <div className="overflow-y-auto h-[calc(100%-140px)] pb-6">
         <div className="flex flex-col">

@@ -50,9 +50,12 @@ export const MobileSideBar = (props: Props) => {
   };
   return (
     <div className="w-60 h-screen bg-white border-[#EAE9ED]  fixed px-3 z-50">
-      <div className="h-14 flex items-center">
-        <img src="infitechLogo.png" className="w-40" />
-      </div>
+      <Link
+        to="/"
+        className="h-14 flex items-center px-4 hover:opacity-80 transition-opacity"
+      >
+        <img src="/Energizer.svg" alt="Energized Logo" className="w-40" />
+      </Link>
       {primeDashboard.map((e) => (
         <NavLink
           onClick={() => setOpen(false)}
